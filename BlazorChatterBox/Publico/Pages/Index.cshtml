@@ -1,0 +1,80 @@
+﻿@page
+@model IEnumerable<Publico.Models.Message>;
+@{
+    ViewData["Title"] = "Home page";
+    var userName = User.Identity.Name;
+}
+
+<div class="jumbotron bg-light">
+    <h2 class="text-center text-primary">
+        <i class="fab fa-facebook-messenger" />&nbsp; Public Talk
+    </h2>
+    <div class="row">
+        <div class="col-md-12" id="chat">
+            @if (Model != null)
+            {
+                @foreach (var message in Model.OrderBy(m => m.When))
+                {
+                    string containerClass, timePostion, textAlign, contColor, offSet;
+                    if (userName == message.UserName)
+                    {
+                        containerClass = "container darker";
+                        timePostion = "time-right text-light";
+                        textAlign = "text-right text-white";
+                        contColor = "bg-primary";
+                        offSet = "col-md-6 offset-md-6";
+                    }
+                    else
+                    {
+                        containerClass = "container";
+                        timePostion = "time-left";
+                        textAlign = "text-left";
+                        contColor = "bg-light";
+                        offSet = "";
+                    }
+                    <div class="row">
+                        <div class="@offSet">
+                            <div class="@containerClass @contColor">
+                                <p class="sender @textAlign">@message.UserName</p>
+                                <p class="@textAlign">@message.Text</p>
+                                <span class="@timePostion">@message.When.ToString()</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-12">
+            <form asp-action="Create"
+                  data-ajax-begin="clearInputField" data-ajax-complete=""
+                  data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                  data-ajax="tre" data-ajax-method="Post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" />
+                <div class="form-group">
+                    <input name="Text" class="form-control" id="messageText" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Send" id="submitButton" class="btn btn-primary" />
+                </div>
+                <input type="hidden" value="@userName" name="username" />
+            </form>
+        </div>
+
+    </div>
+</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+    const userName = "@ViewBag.CurrentUserName";
+    </script>
+}
+
+@section scripts {
+    @*Scripts*@
+    <script src="~/signalr/signalr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery-unobtrusive-ajax.min.js"></script>
+    <script src="~/js/signalrReqHandler.js"></script>
+    <script src="~/js/chat.js"></script>
+    @*CSS*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+}
