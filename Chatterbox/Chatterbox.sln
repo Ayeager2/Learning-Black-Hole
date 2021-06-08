@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publico", "Publico\Publico.csproj", "{BADEB7DE-66A0-425C-BE49-28B1FFDE257C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatterbox", "Chatterbox\Chatterbox.csproj", "{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BADEB7DE-66A0-425C-BE49-28B1FFDE257C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BADEB7DE-66A0-425C-BE49-28B1FFDE257C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BADEB7DE-66A0-425C-BE49-28B1FFDE257C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BADEB7DE-66A0-425C-BE49-28B1FFDE257C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {117C7361-F30A-4056-9DF2-AC419E957E85}
+		SolutionGuid = {7B2293E5-CDA5-4CD4-BDEF-88D70564593E}
 	EndGlobalSection
 EndGlobal
