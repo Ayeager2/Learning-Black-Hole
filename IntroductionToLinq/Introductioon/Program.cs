@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Introduction
 {
@@ -10,6 +11,20 @@ namespace Introduction
         {
             string path = @"C:\windows";
             ShowLargeFileWithoutLinq(path);
+            Console.WriteLine("***");
+            ShowLargeFileWithLinq(path);
+
+        }
+        private static void ShowLargeFileWithLinq(string path)
+        {
+            var query = new DirectoryInfo(path).GetFiles()
+                        .OrderByDescending(f => f.Length)
+                        .Take(5);
+             foreach (var file in query)
+            {
+                Console.WriteLine($"{file.Name,-20} : {file.Length,10:N0}");
+
+            }
         }
 
         private static void ShowLargeFileWithoutLinq(string path)
