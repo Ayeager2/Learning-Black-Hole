@@ -23,26 +23,38 @@ namespace Cars
             var db = new CarDb();
             db.Database.Log = Console.WriteLine;
 
-            var query = from car in db.Cars
-                        orderby car.Combined descending, car.Name ascending
-                        select car;
+            var query = db.Cars.GroupBy(c => c.Manufacturer)
+                .Select(g => new
+                {
+                    Name = g.Key,
+                    Cars = g.OrderByDescending(c => c.Combined).Take(2)
+                });
 
             var query2 =
-                db.Cars
-                .Where(c => c.Manufacturer == "BMW")
-                .OrderByDescending(c => c.Combined)
-                .ThenBy(c => c.Name)
-                .Take(10);
+                from car in db.Cars
+                group car by car.Manufacturer into manufacturer
+                select new
+                {
+                    Name = manufacturer.Key,
+                    Cars = (from car in manufacturer
+                            orderby car.Combined descending
+                            select car).Take(2)
+                };
 
-            foreach (var car in query)
+
+            foreach (var group in query)
             {
-                Console.WriteLine($"{car.Name}: {car.Combined}");
+                Console.WriteLine(group.Name);
+                foreach (var car in group.Cars)
+                {
+                    Console.WriteLine($"\t{car.Name}: {car.Combined}");
+                }
             }
         }
 
         private static void InsertData()
         {
-            var cars =ProcessCars("fuel.csv");
+            var cars = ProcessCars("fuel.csv");
             var db = new CarDb();
             db.Database.Log = Console.WriteLine;
 
@@ -53,7 +65,7 @@ namespace Cars
                     db.Cars.Add(car);
                 }
                 db.SaveChanges();
-            }      
+            }
 
         }
 
