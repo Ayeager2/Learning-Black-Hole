@@ -1,6 +1,15 @@
 ﻿
 
 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CreateXml();
+            QueryXml();
+        }
+
+
 
             var cars = ProcessCars("fuel.csv");
             var manufacturers = ProcessManufacturers("manufacturers.csv");

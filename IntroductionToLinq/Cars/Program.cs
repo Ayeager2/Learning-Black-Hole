@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -9,8 +10,51 @@ namespace Cars
     {
         static void Main(string[] args)
         {
-            CreateXml();
-            QueryXml();
+            //to make it safe only for me not in team enviroment or prod
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<CarDb>());
+
+            InsertData();
+            QueryData();
+
+        }
+
+        private static void QueryData()
+        {
+            var db = new CarDb();
+            db.Database.Log = Console.WriteLine;
+
+            var query = from car in db.Cars
+                        orderby car.Combined descending, car.Name ascending
+                        select car;
+
+            var query2 =
+                db.Cars
+                .Where(c => c.Manufacturer == "BMW")
+                .OrderByDescending(c => c.Combined)
+                .ThenBy(c => c.Name)
+                .Take(10);
+
+            foreach (var car in query)
+            {
+                Console.WriteLine($"{car.Name}: {car.Combined}");
+            }
+        }
+
+        private static void InsertData()
+        {
+            var cars =ProcessCars("fuel.csv");
+            var db = new CarDb();
+            db.Database.Log = Console.WriteLine;
+
+            if (!db.Cars.Any())
+            {
+                foreach (var car in cars)
+                {
+                    db.Cars.Add(car);
+                }
+                db.SaveChanges();
+            }      
+
         }
 
         private static void QueryXml()
