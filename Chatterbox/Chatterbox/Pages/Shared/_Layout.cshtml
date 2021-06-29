@@ -7,22 +7,10 @@
 
 </head>
 
-
-
 <body>
-    <header>
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand main-navbar" href="#">
-                <i class="fas fa-bars"></i>
-                ChatterBox
-            </a>
-        </nav>
-    </header>
-
-
 
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="p-3">
             @RenderBody()
         </main>
     </div>
@@ -37,9 +25,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <script type="text/javascript" src="@Url.Content("/js/sidebarnav")"></script>
-    <link href="@Url.Content("~/css/main-sidebar.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/sidebarnav.js"></script>
+    <link href="~/css/sidebar.css" rel="stylesheet" type="text/css" />
+
 
     @RenderSection("Scripts", required: false)
 </body>

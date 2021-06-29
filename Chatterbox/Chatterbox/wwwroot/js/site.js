@@ -4,21 +4,3 @@
 // Write your Javascript code.
 
 
-$(document).ready(function () {
-    console.log("ready!");
-});
-
-$(window).on("load", function () {
-    console.log("window loaded");
-});
-
-
-var sidenavbar = $('sidenav');
-
-$('main-navbar').click(function ({
-    console.log("");
-
-$('sidenav').toggle("slow", function () {
-
-});
-});

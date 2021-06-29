@@ -4,46 +4,56 @@
     ViewData["Title"] = "Home page";
 }
 
-<div id="mySidenav" class="sidenav" style="width:250px">
-    <section class="sidebar">
+<div id="mySidenav" class="sidenav" style="width:250px ">
+    <div class="row" id="header-row">
+        <div class="col-8" id="main-chatterbox-label">
+            <label>
+                Chatterbox
+            </label>
+        </div>
+        <div class="col-4">
+            <button type="button" id="navbar-btn" class="btn btn-sm">
+                <i class="far fa-times-circle"></i>
+            </button>
+        </div>
+    </div>
+    <div class="sidebar">
         <div class="sidebar-menu tree ">
+            </nav>
             <ul>
                 <li>
-                    <i class="fas fa-angle-right rotate" id="current-characters-dropdown"></i>
                     <i class="far fa-id-card"></i>Current Characters
-                    <ul>
+                    <ul id="charater-drop-down-list">
                     </ul>
                 </li>
                 <li>
-                    <i class="fas fa-angle-right rotate" id="dm-zone-dropdown"></i>
                     <i class="fas fa-book-reader"></i>DM Zone
                     <ul id="DM Zone">
                         <li>
-                            <i class="fas fa-angle-right rotate" id="charater-sheets-dropdown"></i>
                             <span><i class="fas fa-chalkboard-teacher"></i>Charater Sheets</span>
+                            <ul id="charater-sheets-list">
+                            </ul>
                         </li>
                         <li>
-                            <i class="fas fa-angle-right rotate" id="maps-dropdown"></i>
                             <span><i class="fas fa-map"></i>Current Maps</span>
+                            <ul id="current-maps-list"></ul>
                         </li>
                     </ul>
                 </li>
             </ul>
-    </section>
+        </div>
+    </div>
 </div>
 
 <footer></footer>
 
-@section scripts{
-    <script src="https://kit.fontawesome.com/305501a688.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/305501a688.js" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="@Url.Content("~/js/sidebarnav.js")"></script>
+<link href="@Url.Content("~/css/sidebar.css")" rel="stylesheet" type="text/css" />
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <script type="text/javascript" src="@Url.Content("~/js/sidebarnav.js")"></script>
-    <link href="@Url.Content("~/css/main-sidebar.css")" rel="stylesheet" type="text/css" />
-}
