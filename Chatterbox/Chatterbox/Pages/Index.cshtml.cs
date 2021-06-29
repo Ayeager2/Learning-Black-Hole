@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Chatterbox.Pages
+namespace ChatterBox.Pages
 {
     public class IndexModel : PageModel
     {

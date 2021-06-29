@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31313.79
+VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatterbox", "Chatterbox\Chatterbox.csproj", "{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterBox", "ChatterBox\ChatterBox.csproj", "{01AAAC68-C6D4-4096-A319-2D2C80A7B855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEEEAC31-F11D-4DC0-B13A-6C779B78D515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01AAAC68-C6D4-4096-A319-2D2C80A7B855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01AAAC68-C6D4-4096-A319-2D2C80A7B855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01AAAC68-C6D4-4096-A319-2D2C80A7B855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01AAAC68-C6D4-4096-A319-2D2C80A7B855}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7B2293E5-CDA5-4CD4-BDEF-88D70564593E}
+		SolutionGuid = {AB8DAA32-E414-4C59-88D1-F371985558B8}
 	EndGlobalSection
 EndGlobal

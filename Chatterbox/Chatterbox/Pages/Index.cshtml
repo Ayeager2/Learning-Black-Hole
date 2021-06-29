@@ -4,13 +4,48 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <div class="container-fluid">
-        <div class="row DND">            
-            <img src="~/images/dnd.jpg" class=" rounded mx-auto d-block DND" alt="Responsive image">
+<body id="dash-body">
+    <row>
+        <div class="wrapper col-3">
+            <section class="sidebar">
+                <div class="sidebar-menu tree ">
+                    <ul>
+                        <li>
+                            <i class="fas fa-angle-right rotate" id="current-characters-dropdown"></i>
+                            <i class="far fa-id-card"></i>Current Characters
+                            <ul>
+                            </ul>
+                        </li>
+                        <li>
+                            <i class="fas fa-angle-right rotate" id="dm-zone-dropdown"></i>
+                            <i class="fas fa-book-reader"></i>DM Zone
+                            <ul id="DM Zone">
+                                <li>
+                                    <i class="fas fa-angle-right rotate" id="charater-sheets-dropdown"></i>
+                                    <span><i class="fas fa-chalkboard-teacher"></i>Charater Sheets</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-angle-right rotate" id="maps-dropdown"></i>
+                                    <span><i class="fas fa-map"></i>Current Maps</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+            </section>
         </div>
-            <img src="~/images/pathfinder.jpg" class="rounded mx-auto d-block PthFinder" alt="Responsive image">
-        </div>
-    </div>
-</div>
 
+    </row>
+</body>
+
+<footer></footer>
+
+@section scripts{
+    <script src="https://kit.fontawesome.com/305501a688.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="@Url.Content("~/css/main-sidebar.css")" rel="stylesheet" type="text/css" />
+}
