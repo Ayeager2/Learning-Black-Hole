@@ -1,0 +1,8 @@
+             $('div[title*="Title"]').html('Updated Div Value due to Title');            
+             var divs = $('div').css('background-color', 'Green');
+             alert(divs.length);
+           $('div').each(function (){
+                alert($(this).html());
+            });
+            var coll = $('div,span');
+            alert(coll.length);         
