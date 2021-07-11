@@ -1,0 +1,71 @@
+local p = {}
+
+function p.calc( frame )
+    local args = frame:getParent().args
+    local attack = tonumber(args.attack or 1)
+    local strength = tonumber(args.strength or 1)
+    local defence = tonumber(args.defence or 1)
+    local hitpoints = tonumber(args.hitpoints or 10)
+    local ranged = tonumber(args.ranged or 1)
+    local magic = tonumber(args.magic or 1)
+    local prayer = tonumber(args.prayer or 1)
+    
+    return p._calc( attack, strength, defence, hitpoints, ranged, magic, prayer )
+end
+
+function p._calc ( attack, strength, defence, hitpoints, ranged, magic, prayer )
+    -- This will be used several times:
+    local attstr = attack + strength
+
+    -- Melvor combat level formula:
+    -- 0.25∗(Defence+Hitpoints+⌊Prayer/2⌋) + 0.325∗Max(Attack+Strength, ⌊1.5∗Ranged⌋, ⌊1.5∗Magic⌋)
+    local baselvl = 0.25 * ( defence + hitpoints + math.floor( prayer * 0.5 ) )
+    local offenselvl =  0.325 * ( math.max( attstr, math.floor( magic * 1.5 ), math.floor( ranged * 1.5 ) ) )
+    local lvl = baselvl + offenselvl
+
+    -- Calculate what's needed for another combat level
+    -- formula: 1 - (current level - floor(current level)) / weight
+    -- Prayer is weighted 12.5%, def and hp are 25%, att/str are 32.5%, magic and ranged are 48.75%
+    local HpDef = math.ceil( ( 1 - ( lvl % 1 ) ) * 4 )
+    -- Since pray increment cb lvl in 0.25 steps, we need to calculate amount of 0.25 steps required, then multiply by 2 (because 2 lvls required for 1 step) and subtract 1 if current level is odd (because it will only take 1 lvlup for next 0.25 step)
+    local Pray = math.ceil( ( 1 - ( lvl % 1 ) ) * 4 ) * 2 - (prayer % 2)
+    local AttStr, Mage, Range
+    local cbtype
+
+    if attstr >= 2*magic and attstr >= 2*ranged then
+        cbtype = 'melee'
+        AttStr = math.ceil ( ( 1 - ( lvl % 1 ) ) / 0.325 )
+        Mage = math.ceil( ( attstr - magic * 1.5 ) / 2 + ( 1 - ( lvl % 1 ) ) / 0.4875 )
+        Range = math.ceil( ( attstr - ranged * 1.5 ) / 2 + ( 1 - ( lvl % 1 ) ) / 0.4875 )
+    else
+        -- calculate att/str levels needed for combat level up:
+        -- first calculate how many levels to get to make your combat melee-based, then add the amount of levels needed from there.
+        AttStr = math.max( ranged, magic ) * 1.5 - attstr + math.ceil( ( 1 - ( lvl % 1 ) ) / 0.325 )
+
+        -- store this value in variable Mage first: assume mage-based combat first
+        Mage = math.ceil( ( 1 - ( lvl % 1 ) ) / 0.4875 )
+        if ranged > magic then
+            cbtype = 'ranged'
+            -- move the calculated value to variable Range: the combat is range-based
+            Range = Mage
+            -- same logic for melee: amount of levels to get mage-based combat PLUS levels to another cb from there
+            Mage = ranged - magic + Range
+        else
+            cbtype = 'magic'
+            -- same logic again
+            Range = magic - ranged + Mage
+        end
+    end
+
+    local level = 'Your combat level is <b>' .. math.floor( lvl ) .. '</b>, based on your ' .. cbtype .. ' level(s). '
+    local tips = 'For level ' .. ( math.floor( lvl ) + 1 ) .. ', you need one of the following:\n*' ..
+        AttStr .. ' [[Attack]] or [[Strength]] levels,\n*' ..
+        HpDef .. ' [[Defence]] or [[Hitpoints]] levels,\n*' ..
+        Range .. ' [[Ranged]] levels,\n*' ..
+        Mage .. ' [[Magic]] levels,\n*' ..
+        Pray .. ' or [[Prayer]] levels.\n'
+    return level .. tips
+
+end
+
+return p
