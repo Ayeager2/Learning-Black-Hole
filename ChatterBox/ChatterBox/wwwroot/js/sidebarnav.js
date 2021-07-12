@@ -8,11 +8,12 @@ $(window).on("load", function () {
 
 
 
-$('#navbar-btn').click(function(){
-
-    console.log("main navbar click");
-    
+$('#navbar-close-btn').click(function(){
+   $('#mySidenav').hide();  
 });
 
 
 
+$('#navbar-open-btn').click(function () {
+    $('#mySidenav').show();
+});
