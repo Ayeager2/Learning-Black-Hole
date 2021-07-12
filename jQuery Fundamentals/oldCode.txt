@@ -5,4 +5,101 @@
                 alert($(this).html());
             });
             var coll = $('div,span');
-            alert(coll.length);         
+            alert(coll.length);     
+
+         
+          Using short-cut event functions
+                       $('#MyDiv').mouseenter(function () {
+                           Toggle(this);
+                           $(this).css('cursor', 'pointer');
+                       })
+                       .mouseleave(function () {
+                           Toggle(this);
+                       })
+                       .mouseup(function (e) {
+                           alert($(e.target).attr('id'));
+                           $(this).text('X: ' + e.pageX + ' Y: ' + e.pageY);
+                       });
+
+                       function Toggle(div) {
+                          $(div).toggleClass('Highlight');
+                       }
+
+            bind() and on()
+            /*  bind() is deprecated - use on() as shown below
+                
+                $('#MyDiv').bind('mouseenter mouseleave mouseup', function (e) {
+                $(this).toggleClass('Highlight');
+                $(this).css('cursor', 'pointer');
+                if (e.type == 'mouseup') {
+                    $(this).text('X: ' + e.pageX + ' Y: ' + e.pageY);
+                }
+            });*/
+
+                        Using hover()
+                       $('#MyTable tr').hover(
+                           function () {
+                               //mousenter
+                               $(this).css('background-color', '#efefef');
+                           },
+                           function () {
+                               //mouseleave
+                               $(this).css('background-color', '#fff');
+                           });
+            Using toggle()
+                       $('#MyTable tr').toggle(
+                           function () {
+                               mousenter
+                               $(this).css('background-color', '#efefef');
+                           },
+                           function () {
+                               mouseleave
+                               $(this).css('background-color', '#fff');
+                           },
+                           function () {
+                               mouseleave
+                               $(this).css('background-color', 'Yellow');
+                           }
+                           );
+
+            /*
+            <input type="button" id="AddPhone" value="Add Phone" />
+            <div id="PhonesDiv" style="margin-top:10px;">
+                <div class="PhoneTypeDiv">
+                    <select class="PhoneType">
+                        <option value="">Select One:</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Office">Office</option>
+                    </select>
+                </div>
+                <div class="PhoneNumberDiv">
+                    <input type="text" class="PhoneNumber" maxlength="12" />
+                </div>
+            </div>
+            */
+            Note that live/die has been removed in jQuery 1.9+ so if you're using a newer script version
+            as in this project then you should use on/off or delegate : http://api.jquery.com/on/
+                       $('input', phonesDiv).live('keypress', function (e) {
+                           if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 45) {
+                               e.stopPropagation();
+                               return false;
+                           }
+                       });
+
+            /*
+            delegate() example but use on()
+            phonesDiv.delegate('input', 'keypress', function (e) {
+                if ((e.keyCode < 48 || e.keyCode > 57) && e.keyCode != 45) {
+                    e.stopPropagation();
+                    return false;
+                }
+            });*/
+
+                    Handle events the old-fashioned way
+               var button = document.getElementById('SubmitButton');
+               if (document.addEventListener) {
+                   button.addEventListener('click', function () { alert('Clicked Button'); }, false);
+               }
+               else {
+                   button.attachEvent('onclick', function () { alert('Clicked IE Button'); });
+               }
