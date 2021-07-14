@@ -26,23 +26,26 @@ $(function () {
 
     //$("#progress").progressbar({ value: 60 });
 
-    $("#progress").progressbar({ value: 100 });
+    $("#progress").progressbar({ value: 0 });
 
-    var value = 100;
-
-    // countdown();
+    var value = 0;
+    var experiencePoints =0;
+    countdown();
 
     function countdown() {
-        value--;
+        value++;
         $("#progress").progressbar("option", "value", value);
         $("#countdown").text(value);
 
-        if (value > 0) {
-            setTimeout(countdown, 100);
+        if (value < 100) {
+            setTimeout(countdown, 10);
         }
         else {
             $("#countdown").text("completed");
-            $("#progress").progressbar("disable");
+            value = 0;
+            experiencePoints++;
+            $("#experience").text(experiencePoints);
+            countdown();
         }
     }
 
