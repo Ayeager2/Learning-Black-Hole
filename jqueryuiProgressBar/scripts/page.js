@@ -26,7 +26,7 @@ $(function () {
 
     //$("#progress").progressbar({ value: 60 });
 
-    $("#progress").progressbar({ value: 0 });
+    $("#progress").progressbar({ value: 100 });
 
     var value = 0;
     var experiencePoints =0;
@@ -38,7 +38,7 @@ $(function () {
         $("#countdown").text(value);
 
         if (value < 100) {
-            setTimeout(countdown, 10);
+            setTimeout(countdown, 100);
         }
         else {
             $("#countdown").text("completed");
@@ -56,29 +56,55 @@ $(function () {
 
     $("#tabs").tabs();
 
-    $("#accordian").accordion({autoHeight: false, collapsible: true,
-    change: function (event, ui) {
-        console.log(event);
-        console.log(ui);
-      }
+    $("#accordian").accordion({ autoHeight: false, collapsible: true,
+        change: function (event, ui) {
+            console.log(event);
+            console.log(ui);
+        }
     });
-    $("#accordian").accordion("activate",0);
+
+    $("#accordian").accordion("activate", false);
 
     var classes = [
-        "C#",
-        "LINQ",
-        "Entity Framework",
-        "ASP .NET MVC",
-        "jQuery UI",
-        "CSS",
-        "JQuery",
-        "JavaScript",
-        "Test driven development",
-        "Design patterns",
-    ]
+	    "C#",
+	    "Entity Framework",
+	    "LINQ",
+	    "ASP.NET MVC",
+	    "jQuery UI",
+	    "CSS",
+	    "Ruby",
+	    "jQuery",
+	    "JavaScript",
+	    "Test driven development",
+	    "Design patterns"
+    ];
+
     $("#search").autocomplete({
         source: classes,
-        // source: "autocompletejason.ashx"
+        // source: "autocompletejson.ashx",
+        // minLength: 2,
+        // delay: 1500
     });
 
+    $("#buttons").children()
+                 .button({ icons: { primary: "ui-icon-search", secondary: "ui-icon-wrench"} })
+                 .click(function () {
+                     alert($(this).value);
+                 });
+
+    $("#radios").buttonset();
+    $("#checks").buttonset();
+
+    $("#dateselection").datepicker({
+        numberOfMonths: 1,
+        showWeek: true,
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        minDate: new Date(2008, 1 - 1, 1),
+        maxDate: new Date(2012, 12 - 1, 31)
+    });
+    // $("#dateselection").datepicker("setDate", new Date(2011, 6 - 1, 11));
+
+// });
 });
