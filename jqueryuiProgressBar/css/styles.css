@@ -3,4 +3,64 @@
     background-color:#cccc99;
     font-family: Arial, Sans-Serif;
 }
+#draggables
+{
+    background-color:#cccccc;
+    padding: 20px;
+    border: 5px ridge black;
+    border-radius: 10px;
+}
 
+.ui-draggable
+{
+    background-color:#33FF33;
+    height:100px;
+    width: 100px;
+    margin:10px;
+    display:inline-block;
+    border: 5px solid black;
+    border-radius: 10px;
+    text-align:center;
+    box-shadow: 5px 5px 5px black;
+}
+
+.ui-draggable header
+{
+    background-color:#3333FF;
+    color: #ffffff;
+    padding:10px;
+} 
+
+.semitransparent
+{
+    opacity: 0.6;
+}
+
+.opaque 
+{
+    opacity: 1.0;
+}
+
+#sortable
+{
+    list-style-type:none;
+}
+
+#sortable > li
+{
+    height:30px;  
+    background-color:#993333;  
+    color:white;
+    margin:5px;
+    padding: 5px;
+    text-align:center;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+#sortable > .placeholder 
+{
+    box-shadow: inset 0 0 15px black;
+    background-color:transparent;
+    border:none;
+}

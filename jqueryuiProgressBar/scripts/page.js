@@ -3,6 +3,36 @@
 
 $(function () {
 
+    $("#d1").draggable({
+        revert: "invalid"
+
+    }); 
+    $("#d2").draggable({
+        grid: [50,100],
+        revert: "invalid"
+
+    });
+    $("#d3").draggable({
+    });
+
+    $("#d1, #d2, #d3").draggable("option", "stack", ".ui-draggable");
+
+    $("#trash").droppable({
+        accept: "#d3",
+        drop: function (event, ui){
+                ui.draggable.fadeOut().remove(function(){
+                    ui.draggable.remove();
+                });
+        }
+    })
+
+    $("#sortable").sortable({placeholder: "placeholder"});
+
+    $("#d3").resizable({
+        aspectRation: true,
+        alsoResize: "#d2, #d1"
+    });
+
     $("#dialog").dialog(
         {
             autoOpen: false,
@@ -104,7 +134,7 @@ $(function () {
         minDate: new Date(2008, 1 - 1, 1),
         maxDate: new Date(2012, 12 - 1, 31)
     });
-    // $("#dateselection").datepicker("setDate", new Date(2011, 6 - 1, 11));
 
-// });
+
+
 });
