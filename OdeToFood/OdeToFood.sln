@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeToFood.Web", "OdeToFood.Web\OdeToFood.Web.csproj", "{182B88A5-341C-417D-A1C1-0FF6361D0896}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeToFood.Web", "OdeToFood.Web\OdeToFood.Web.csproj", "{DE0A62A0-8F22-4546-AA7F-D6F421B062C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeToFood.Data", "OdeToFood.Data\OdeToFood.Data.csproj", "{D29B1790-9AC1-4734-9563-4B5AF638DEEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{182B88A5-341C-417D-A1C1-0FF6361D0896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{182B88A5-341C-417D-A1C1-0FF6361D0896}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{182B88A5-341C-417D-A1C1-0FF6361D0896}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{182B88A5-341C-417D-A1C1-0FF6361D0896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE0A62A0-8F22-4546-AA7F-D6F421B062C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE0A62A0-8F22-4546-AA7F-D6F421B062C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE0A62A0-8F22-4546-AA7F-D6F421B062C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE0A62A0-8F22-4546-AA7F-D6F421B062C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29B1790-9AC1-4734-9563-4B5AF638DEEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29B1790-9AC1-4734-9563-4B5AF638DEEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29B1790-9AC1-4734-9563-4B5AF638DEEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29B1790-9AC1-4734-9563-4B5AF638DEEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A71E7198-F554-4BA4-B598-BFFAE6CCEF21}
+		SolutionGuid = {95A5FE9F-E448-4DF0-B126-FACA30DC112B}
 	EndGlobalSection
 EndGlobal
