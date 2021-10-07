@@ -17,9 +17,22 @@ namespace OdeToFood.Data.Services
                 new Restaurant{Id = 3 , Name = "Mango Grove", Cuisine = CuisineType.Indian},
             };
         }
+
+        public Restaurant Get(int id)
+        {
+            return restaurants.FirstOrDefault(x => x.Id == id);
+        }
+
         public IEnumerable<Restaurant> GetAll()
         {
             return restaurants.OrderBy(r => r.Name);
         }
+        public void Add(Restaurant restaurant)
+        {
+            //right now this is in memeory only db for later
+            restaurants.Add(restaurant);
+            restaurant.Id = restaurants.Max(r => r.Id) + 1;
+        }
+
     }
 }
