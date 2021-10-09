@@ -13,10 +13,10 @@ namespace OdeToFood.Web
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<InMemoryRestaurantData>()
+            builder.RegisterType<SqlRestaurantData>()
                    .As<IRestaurantData>()
                    .SingleInstance();
-            //singleinstance will not work if there are multiple users useing application
+            builder.RegisterType<OdeToFoodDBContext>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -27,10 +27,10 @@ namespace OdeToFood.Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<InMemoryRestaurantData>()
+            builder.RegisterType<SqlRestaurantData>()
                    .As<IRestaurantData>()
-                   .SingleInstance();
-            //singleinstance will not work if there are multiple users useing application
+                   .InstancePerRequest();
+            builder.RegisterType<OdeToFoodDBContext>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
