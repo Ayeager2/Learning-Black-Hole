@@ -5,19 +5,19 @@ let domActionBuffer = [];
 let flushTimeout;
 
 window.display = function () {
-  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 100);
+  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 1000);
 
   domActionBuffer.push({ action: 'display', arguments: arguments });
 };
 
 window.displayRegexArray = function () {
-  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 100);
+  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 1000);
 
   domActionBuffer.push({ action: 'displayRegexArray', arguments: arguments });
 };
 
 window.clearDisplay = function () {
-  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 100);
+  if (!flushTimeout) flushTimeout = setTimeout(flushDomQueue, 1000);
 
   domActionBuffer.push({ action: 'clearDisplay' });
 };
@@ -126,4 +126,4 @@ let reloadJS = () => {
   body.appendChild(newScriptTag);
 };
 
-setInterval(reloadJS, 1000);
+setInterval(reloadJS, 10000);

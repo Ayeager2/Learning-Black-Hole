@@ -1,4 +1,307 @@
-  let person2 = {};
+  
+  //regex
+     function checkPasswordComplexitry(password){
+       let regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$','gi');
+    //    let regex2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$/gi;
+
+       return regex.test(password);
+   };  
+
+    display( checkPasswordComplexitry('Stronger1'));
+
+        function findAlearts(logData){
+        let regex = /ERROR(.*?):(.*?);/g;
+        let results = regex.exec(logData);
+        while(results !== null){
+            display(results[1]);
+            display(results[2]);
+            display('----------')
+            results = regex.exec(logData);
+        }
+
+        // return regex.exec(logData);
+    }
+    let logData = 'INFO:OK;ERROR(HIGH):Somethings broke; ERROR:(LOW)Something fishy; ERROR:(MEDIUM)something something;';
+
+    findAlearts(logData);
+    
+    // let results = findAlearts(logData);
+    // display(results);
+    // display(results[0]);
+    // display(results.index);
+    // display(results.input);
+  
+  //Classes
+
+      class Person{
+        constructor(firstName,lastName,age){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+        }
+        get fullName(){
+            return this.firstName + ' '+ this.lastName
+        }
+        set fullName(fullName){
+            var nameParts = fullName.split(' ');
+            this.firstName = nameParts[0];
+            this.lastName = nameParts[1];
+        }
+        isAdult(){
+            return this.age >= 18;
+        }
+    }
+
+    class Student extends Person{
+        constructor(firstName,lastName,age){
+            super(firstName,lastName,age);
+           this._enrolledCourses = [];
+        }
+        enroll(courseId){
+            this._enrolledCourses.push(courseId);
+        }
+        getCourses(){
+            return this.fullName + "'s enrolled courses are: " +
+            this._enrolledCourses.join(', ');  
+        }
+
+    }
+
+    let bob = new Student('Bob', 'Cooper', 29);
+    bob.enroll('CS205');
+    bob.enroll('MA101') ; 
+    bob.enroll('SA101');
+
+
+    Object.defineProperty(Person.prototype, 'fullName', {enumerable:true});
+
+    let jim = new Person('Jim', 'Cooper', 29);
+    jim.fullName = 'Peter Pan';
+    
+    display(jim)
+    display(jim.fullName)
+    display(jim.age)
+    display(jim.isAdult())
+    display(bob)
+    display(bob.getCourses())
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //prototype work
+
+  let myFunction = function(){};
+  display(myFunction.prototype);
+
+  let person = {firstName: 'Anna'};
+
+  display(person.prototype);
+  display(person.__proto__);
+
+  sofia.__proto__.age = 19;
+
+  display(bob.__proto__);
+  display(Person.prototype === bob.__proto__);
+  display(sofia.__proto__);
+    jim.age = 18;
+
+
+  function Person(firstName, lastName){
+    this.firstName = firstName;
+    this.lastName= lastName;
+  };
+  Person.prototype.age = 29;
+
+  let jim = new Person('Jim', 'bobbers');
+  let sofia = new Person('Sofia', 'fefefe');
+
+  display(jim.age);
+  display(sofia.age);
+
+  Person.prototype = {age: 18};
+  let kris = new Person('Kris', 'Deviad');
+
+  display(kris.age);
+  Person.prototype.age = 29;
+
+  let jim = new Person('Jim', 'bobbers');
+
+  display(jim.__proto__);
+  display(jim.__proto__.__proto__);
+  display(jim.__proto__.__proto__.__proto__);
+
+  function Person(firstName, lastName, age){
+
+
+    this.firstName = firstName;
+    this.lastName= lastName;
+    this.age = age;
+    Object.defineProperty(this, 'fullName',
+    {
+      get: function (){
+        return this.firstName + ' '+ this.lastName
+        
+      },
+      enumerable : true,
+    });
+  };
+
+  function Student(firstName,lastName,age) {
+    Person.call(this, firstName, lastName,age);
+
+    this._enrolledCourses =[];
+    this.enroll = function (courseId) {
+      this._enrolledCourses.push(courseId);
+    };
+    this.getCourses = function () 
+    {
+      return this.fullName + "'s enrolled courses are: " +
+      this._enrolledCourses.join(', ');  
+    };
+  }
+  Student.prototype = Object.create(Person.prototype);
+  Student.prototype.constructor = Student;
+
+  let jim = new Student('Jim', 'Beager', 34);
+  jim.enroll('CS205');
+  jim.enroll('MA101') ; 
+  jim.enroll('SA101');
+
+
+
+  display(jim);
+  display(jim.__proto__);
+  display(jim.__proto__.__proto__);
+  display(jim.getCourses());
+
+
+
+  //Object work 
+  let person = {
+    firstName: 'Jim',
+    lastName: 'Cooper',
+    age: 18,
+    isAdult() {return person.age >= 18; }
+  }
+    let person = {
+    name:{
+      first: 'Jim',
+      last: 'Cooper',
+    },
+    age: 29,
+  };
+
+  Object.defineProperty(person, 'fullName',
+  {
+    get: function() {
+      return this.name.first + ' ' + this.name.last;
+    },
+    set: function(value){
+      var nameParts = value.split(' ');
+      this.name.first = nameParts[0];
+      this.name.last = nameParts[1];
+    },
+
+  });
+
+  person.fullName = 'Anna Yeager';
+
+  display(person.fullName);
+  display(person.name.first);
+  display(person.name.last);
+  display(person.fullName);
+  Object.defineProperty(person, 'firstName', {configurable:false}); // cannot change the configurable or enumerable attributes and you cannot delete the property 
+  delete person.firstName;
+  Object.defineProperty(person, 'firstName', {enumerable:false });
+
+  Object.defineProperty(person, 'firstName', {writable:false }) // you can change the writable attribute of configurable is false
+
+  
+  for(let propertyName in person){
+    display(propertyName + ': '+person[propertyName]);
+  };
+
+  display(Object.keys(person));
+  display(JSON.stringify(person));
+  display(person.firstName);
+
+  let person = {
+    name:{
+      firstName: 'Jim',
+      lastName: 'Cooper',
+    },
+    age: 18,
+  };
+
+Object.defineProperty(person, 'name', {writable:false});
+doDisplay(Object.getOwnPropertyDescriptor(person, "firstName"));
+person.name.firstName = 'Kris';
+doDisplay(person.name);
+
+  display(person1['firstName'])
+  person1['hair color'] = brown
+  display(person1['hair color '])
+  
+  let person2  = Object.create(
+    Object.prototype,
+    {
+      firstName: {value: 'Jim', enumerable:true, writable:true,configurable:true},
+      lastName: {value: 'Cooper', enumerable:true, writable:true,configurable:true},
+      age: {value: 'Jim', enumerable:true, writable:true,configurable:true},
+    }
+  )
+  display(person1)
+  display(person2)
+
+
+  function Person( firstName, lastName, age){
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age;
+    this.isAdult = function() {return this.age > 21;}
+  }
+
+  let mary = new Person('Mary', 'Seplf', 19);
+  let bob = new Person('Bob', 'Smeark',32)
+
+  display(mary.isAdult());
+  display(bob.isAdult());
+
+  let person1 = {
+    firstName: 'bob',
+    lastName: 'Cooper',
+    age: 18,
+    isAdult: function(){return this.age > 21;}
+  }
+
+  display(person1.isAdult());
+
+  let sofia = {
+    firstName: 'Sofia',
+    lastName: 'Cooper',
+    age: 17,
+    isAdult: function(){return this.age > 18;}
+  }
+  display(sofia.isAdult());
+
+let helthStatus = {
+  height: 68,
+  weight:150,
+}
+function mergeHealthStatus(person, mergeHealthStatus){
+  return Object.assign({}, person, mergeHealthStatus);
+}
+let mergePerson = mergeHealthStatus(person, helthStatus);
+
+display(mergePerson)
+display(person)
+
+let person2 = {};
 
 Object.assign(person2, person)
 
