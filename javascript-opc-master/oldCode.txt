@@ -1,0 +1,24 @@
+  let person2 = {};
+
+Object.assign(person2, person)
+
+display(person2)
+display(person===person2)
+
+
+display(person.isAdult())
+
+  function regsiterUser (firstName, lastName) {  
+    let person = {
+      firstName,
+      lastName
+    }
+    display(person)
+  }
+  regsiterUser('Anna', 'Yeager')
+  
+  display(Object.keys(person))
+
+  for(let proName in person){
+    display(proName);
+  }
