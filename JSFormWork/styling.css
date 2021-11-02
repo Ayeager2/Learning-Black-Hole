@@ -1,0 +1,12 @@
+body {
+    padding: 30px;
+}
+#leftSide{
+    background-color: #85a2f357;
+    height: 600px;
+}
+#mainContent{
+    background-color: #fff5d4;
+    height: 600px;
+    padding-top:20px;
+}
