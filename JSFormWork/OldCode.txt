@@ -1,0 +1,60 @@
+$(':enabled').css('border', '3px solid red');
+$(':text').css('border', '3px solid red');
+setTimeout(function(){
+$(':focus').css('border', '3px solid red');
+},3000);
+$(':input').focus(function(){
+$(this).css('border', '3px solid green');
+});
+$(':input').blur(function(){
+$(this).css('border', '3px solid blue');
+});
+
+$(':input').change(function(){
+$(this).css('border', '3px solid green');
+})
+$(':text').val(function(index, origVal){
+return origVal +' foo';
+});
+
+alert($('form').serialize());
+var a = $('from').serializeArray();
+$.each(a, function(i, field){
+console.log(i + ')'+ field.name + ',' + field.value);
+});
+
+$('form').submit(function(event){
+event.preventDefault();
+})
+
+$.validator.addMethod("startsWithA", function(value, element){
+return /^A/.test(value);
+},'Field must start with A');
+
+$('form').validate({
+rules:{
+fullname:{
+    required:true,
+    minlength: 1,
+    maxlength: 30,
+    startsWithA: true,
+},
+password:{
+    required:true
+}
+        //prevents submission for ajex calls
+submitHandler: function(form) {
+alert('ajax being called...')
+},
+invalidHandler: function(event, validator){
+alert('number of invalid fields: '+ validator.numberOfInvalids());
+}
+}
+});
+
+        submitHandler: function (form) {
+            //alert('ajax being called...')
+        },
+        invalidHandler: function (event, validator) {
+            //alert('number of invalid fields: ' + validator.numberOfInvalids());
+        },
