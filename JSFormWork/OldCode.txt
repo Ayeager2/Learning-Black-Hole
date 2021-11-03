@@ -1,3 +1,52 @@
+
+//data binding
+    //reg js
+        //populate the form
+    $('#fullname').val(person.fullname);
+    $('#age').val(person.age);
+
+    //populate object on submit
+   $('#person-from').submit(function (e) { 
+        person.fullname = $('#fullname').val();
+        person.age = $('#age').val();
+
+        e.preventDefault();        
+    });
+
+    //knockout
+        
+    var person = {
+        fullname: ko.observable("Arcadiusz"),
+        age: ko.observable(19),
+    };
+
+    //populate the form
+    ko.applyBindings(person);
+
+    //populate object on submit
+   $('#person-from').submit(function (e) {        
+
+        e.preventDefault();        
+    });
+
+        <input type="text" id="age" class="form-control" data-bind="value: age"/>
+        <input type="text" id="fullname" class="form-control" data-bind="value: fullname" />
+
+    
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(':enabled').css('border', '3px solid red');
 $(':text').css('border', '3px solid red');
 setTimeout(function(){
