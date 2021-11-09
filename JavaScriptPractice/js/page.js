@@ -1,6 +1,4 @@
 // Accessing the objects
-var ctx = document.getElementById('monthlySales').getContext('2d');
-var pieCtx = document.getElementById('deptSales').getContext('2d');
 var yearlyLabel = document.getElementById('yearlyTotal');
 var newAmount = document.getElementById('itemAmount');
 var newMonth = document.getElementById('monthId');
@@ -8,71 +6,67 @@ let hikingRadio = document.getElementById('hiking');
 let runningRadio = document.getElementById('running');
 let huntingRadio = document.getElementById('hunting');
 
-// Monthly Totals
-var yearlyTotal = 0;
+let testBuffer = new ArrayBuffer(16);
 
-const monthlySales = new Map();
-{
-    let salesA = {
-        a:[1,2]
-    }
-    var map = new WeakMap();
-    map.set(salesA, 'Hiking')
-    console.log('Frist ' + salesA)
-}
+let view1 = new Int16Array(testBuffer);
+view1[0] = 32;
+console.log(view1);
 
+let view2 = new DataView(testBuffer);
+view2.setInt8(2, 43);
+console.log(view2);
+let num = view2.getInt8(2);
+console.log(num);
+
+let view3 = new DataView(testBuffer);
+let num2 = view3.getInt8(2)
+console.log(num2);
+
+let view4 = new DataView(testBuffer, 7, 3);
+view4.setInt8(0,54)
+view4.setInt8(1,23)
+view4.setInt8(2,32)
+let numAlert = view4.getInt8(2)
+console.log(numAlert)
 
 // Add Sales
-function addSale() {
-    monthlySales.set(newMonth.value, parseInt(newAmount.value));
-    monthlySalesChart.data.labels = Array.from(monthlySales.keys());
-    yearlyTotal = 0;
-    monthlySalesChart.data.datasets.forEach((dataset) => {
-        dataset.data = [];
-    })
-    for (let amount of monthlySales.values()) {
-        yearlyTotal = amount + yearlyTotal;
-        yearlyLabel.innerHTML= yearlyTotal;
+function addSale(){
 
-        monthlySalesChart.data.datasets.forEach((dataset) => {
-            dataset.data.push(amount);
-        });
-    }
-    monthlySalesChart.update();
+
 }
 
-function findSale() {
-}
+function findSale(){
 
-function fillValue() {
+	
+
 }
 
 // Bar chart
-var monthlySalesChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [],
-        datasets: [{
-            label: '# of Sales',
-            data: [],
-            backgroundColor: [
-                'rgba(238, 184, 104, 1)',
-                'rgba(75, 166, 223, 1)',
-                'rgba(239, 118, 122, 1)',
-            ],
-            borderWidth: 0
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+// var monthlySalesChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: [],
+//         datasets: [{
+//             label: '# of Sales',
+//             data: [],
+//             backgroundColor: [
+//                 'rgba(238, 184, 104, 1)',
+//                 'rgba(75, 166, 223, 1)',
+//                 'rgba(239, 118, 122, 1)',
+//             ],
+//             borderWidth: 0
+//         }]
+//     },
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
 
 // Pie Chart
 // var deptSalesChart = new Chart(pieCtx, {
@@ -91,6 +85,6 @@ var monthlySalesChart = new Chart(ctx, {
 //         }]
 //     },
 //     options: {
-
+        
 //     }
 // })
