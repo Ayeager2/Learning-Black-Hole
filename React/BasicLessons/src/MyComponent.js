@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 
 export default class MyComponent extends Component {
-    state = {
-        first: false,
-        second: true
+    state={
+        heading: 'React Awesomesause (Busy)',
+        content: 'Loading...'
     };
-    render() {
-        const { first, second } = this.state;
-        return (
+    render(){
+        const {heading, content} = this.state;
+
+        return(
             <main>
-                <section>
-                    <button disabled={first}>First</button>
-                </section>
-                <section>
-                    <button disabled={second}>Second</button>
-                </section>
+                <h1>{heading}</h1>
+                <p>{content}</p>
             </main>
         );
     }
