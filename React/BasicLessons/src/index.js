@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import MyButton from './MyButton';
-import MySection from './MySection';
+const enabled = false;
+const text = 'A Button';
+const placeholder = 'input value...';
+const size = 50;
+render(
+  <section>
+    <button disabled={!enabled}>{text}</button>
+    <input placeholder={placeholder} size={size}></input>
+  </section>,
+  document.getElementById('root')
+);
 
-class MyComponent extends Component {
- render() {
- return (
- <MySection>
-   <MyButton>My Button Text</MyButton>
-   </MySection>
-   
- );
- }
-}
-render(<MyComponent />, document.getElementById('root'));
