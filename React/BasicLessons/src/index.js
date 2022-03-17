@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import MyButton from './MyButton';
 
+import MyButton from './MyButton';
 import MySection from './MySection';
 
 class MyComponent extends Component {
@@ -10,6 +10,7 @@ class MyComponent extends Component {
  <MySection>
    <MyButton>My Button Text</MyButton>
    </MySection>
+   
  );
  }
 }

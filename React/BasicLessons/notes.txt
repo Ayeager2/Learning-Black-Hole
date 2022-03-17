@@ -1,0 +1,2 @@
+-Div is a root componet for rendering, the other tags are its children. Will learn how to render adjacent elements without wrapping them in an parent element.
+-Tag names are case-sensititve and non-HTML elements are capitalized.
