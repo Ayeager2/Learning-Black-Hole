@@ -1,7 +1,14 @@
 import React from 'react';
 import {render } from 'react-dom'
-import MyContainer from './MyComponent';
+import {PermissionsProvider} from './PermissionContext';
+import App from './App';
 
-render(<MyContainer/>, document.getElementById('root'));
+
+render(
+    <PermissionsProvider>
+      <App/>
+    </PermissionsProvider>,
+    document.getElementById('root')
+  );
 
 
