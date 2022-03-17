@@ -1,12 +1,14 @@
-import React, { Fragment} from 'react';
-import First from './First';
-import Second from './Second';
-import Third from './Third';
+import React, { Fragment, useState } from 'react';
 
-export default () => (
-    <Fragment>
-        <First/>
-        <Second/>
-        <Third/>
-    </Fragment>
-);
+export default function App() {
+    const [name] = useState('Adamn');
+    const [age] = useState(35);
+
+    return (
+
+        <Fragment>
+            <p>My name is {name}</p>
+            <p>My age is {age}</p>
+        </Fragment>
+    );
+}
