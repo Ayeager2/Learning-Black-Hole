@@ -18,3 +18,4 @@ time.
 -The initial state of a component should always ben an object with one or more properties. 
 -Properties are immutable, and there's no need for them to be kept as an instance property value. State, on the other hand, changes all the time, so the component needs an instance-level reference to it.
 -You can pass just about anything you want as a property value via JSX, just as long as it's a valid JavaScript expression.
+-A pure function is a function without side effects. That is to say, called with a given set of arguments, the function always produces the same output. This is relevant for React components because, given a set of properties, it's easier to predict what the rendered content will be. Functions that always return the same value with a given argument values are easier to test as well.
