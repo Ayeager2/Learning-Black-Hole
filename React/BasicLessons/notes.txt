@@ -1,2 +1,18 @@
--Div is a root componet for rendering, the other tags are its children. Will learn how to render adjacent elements without wrapping them in an parent element.
--Tag names are case-sensititve and non-HTML elements are capitalized.
+-Div is a root component for rendering, the other tags are its children. Will learn how to render adjacent elements without wrapping them in an parent element.
+-Tag names are case-sensitive and non-HTML elements are capitalized.
+
+Rendering with JSX
+
+-We create new JSX elements so that we can encapsulate larger structures so you can use custom tags. The react component returns the JSX that goes where the tag is used.
+-Namespaced Components: a namespaces provides and organizational unit fro your components so that related components can share the same namespace prefix. The idea of namespaced is to have a namespace component render its child components using the namespace syntax.
+-JSX has a special syntax that allows you to embed JavaScript expressions. Anytime React renders JSX content, expressions in the markup are evaluated.This is the dynamic aspect of JSX.
+-React evaluates expressions and updates the HTML content based on what has already been rendered and what has changed.
+-Fragments are a way to group together chunks of markup without having to add unnecessary structure to your page.
+
+Component Properties, State, and Context
+
+-State is the dynamic part of a React component. You can declare the initial state of a component, which changes over 
+time.
+-Properties(props) are used to pass data into your React components. Instead of calling a method with a new state as teh argument, properties are passed only when the component is rendered.
+-The initial state of a component isnt actually required, but if your component uses state, it should be set.
+-The initial state of a componet should always ben an object with one or more properties. 
