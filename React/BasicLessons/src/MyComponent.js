@@ -1,29 +1,13 @@
 import React, { Component } from 'react';
 
 export default class MyComponent extends Component {
-    state = {
-        first: 'Loading',
-        second: 'Loading.',
-        third: 'Loading..',
-        fourth: 'Loading...',
-        doneMessage: 'finished!',
-
-
+    static defaultProps = {
+        disabled:false,
+        text:'My Button'
     };
-    render() {
-        const { state } = this;
+     render(){
+         const {disabled, text}= this.props;
 
-        return (
-           <ul>
-               {Object.keys(state)
-               .filter(key=> key !== 'doneMessage')
-               .map(key => (
-                   <li key={key}>
-                      <strong>{key}: </strong>
-                      {state[key]}
-                   </li>
-               ))}
-           </ul>
-        );
-    }
+         return <button disabled={disabled}>{text}</button>;
+     }
 }

@@ -16,3 +16,5 @@ time.
 -Properties(props) are used to pass data into your React components. Instead of calling a method with a new state as teh argument, properties are passed only when the component is rendered.
 -The initial state of a component isn't actually required, but if your component uses state, it should be set.
 -The initial state of a component should always ben an object with one or more properties. 
+-Properties are immutable, and there's no need for them to be kept as an instance property value. State, on the other hand, changes all the time, so the component needs an instance-level reference to it.
+-You can pass just about anything you want as a property value via JSX, just as long as it's a valid JavaScript expression.
