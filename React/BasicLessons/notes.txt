@@ -14,5 +14,5 @@ Component Properties, State, and Context
 -State is the dynamic part of a React component. You can declare the initial state of a component, which changes over 
 time.
 -Properties(props) are used to pass data into your React components. Instead of calling a method with a new state as teh argument, properties are passed only when the component is rendered.
--The initial state of a component isnt actually required, but if your component uses state, it should be set.
--The initial state of a componet should always ben an object with one or more properties. 
+-The initial state of a component isn't actually required, but if your component uses state, it should be set.
+-The initial state of a component should always ben an object with one or more properties. 

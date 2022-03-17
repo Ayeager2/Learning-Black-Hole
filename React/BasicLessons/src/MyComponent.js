@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 
 export default class MyComponent extends Component {
-    state={
-        heading: 'React Awesomesause (Busy)',
-        content: 'Loading...'
-    };
-    render(){
-        const {heading, content} = this.state;
+    state = {
+        first: 'Loading',
+        second: 'Loading.',
+        third: 'Loading..',
+        forth: 'Loading...',
+        doneMessage: 'Done!',
 
-        return(
-            <main>
-                <h1>{heading}</h1>
-                <p>{content}</p>
-            </main>
+
+    };
+    render() {
+        const { state } = this;
+
+        return (
+           <ul>
+               {Object.keys(state)
+               .filter(key=> key !== 'doneMessage')
+               .map(key => (
+                   <li key={key}>
+                      <strong>{key}: </strong>
+                      {state[key]}
+                   </li>
+               ))}
+           </ul>
         );
     }
 }
