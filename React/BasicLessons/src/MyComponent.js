@@ -5,8 +5,8 @@ export default class MyComponent extends Component {
         first: 'Loading',
         second: 'Loading.',
         third: 'Loading..',
-        forth: 'Loading...',
-        doneMessage: 'Done!',
+        fourth: 'Loading...',
+        doneMessage: 'finished!',
 
 
     };

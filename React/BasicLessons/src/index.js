@@ -6,7 +6,25 @@ const myComponent = render(<MyComponent />, document.getElementById('root'));
 
 setTimeout(() => {
   myComponent.setState({
-    heading: 'React Awesomeause',
-    content:'Done!'
+    first: 'done!'
+  })
+}, 1000);
+
+setTimeout(() => {
+  myComponent.setState({
+    second: 'done!'
+  })
+}, 2000);
+
+setTimeout(() => {
+  myComponent.setState({
+    third: 'done!'
   })
 }, 3000);
+
+setTimeout(() => {
+  myComponent.setState(state => ({
+    ...state,
+    fourth: state.doneMessage
+  }));
+}, 4000);
