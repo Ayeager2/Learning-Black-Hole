@@ -1,24 +1,28 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
-export default function App() {
-    const [name, setName] = useState('Adamn');
-    const [age, setAge] = useState(35);
+function fetchUser(){
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve({id: 1, name:'Adam'});
+        }, 1000);
+    });
+}
 
-    return (
+export default function App(){
+    const [id, setId] = useState('loading...');
+    const [name, setName] = useState('loading...');
 
+    useEffect(()=> {
+        fetchUser().then(user => {
+            setId(user.id);
+            setName(user.name);
+        });
+    });
+
+    return(
         <Fragment>
-            <section>
-                <input value={name} onChange={e => setName(e.target.value)} />
-                <p>My name is {name}</p>
-            </section>
-            <section>
-                <input
-                    type="number"
-                    value={age}
-                    onChange={e => setAge(e.target.value)}
-                />
-                <p>My age is {age}</p>
-            </section>
+            <p>ID: {id}</p>
+            <p>Name: {name}</p>
         </Fragment>
-    );
+    )
 }
