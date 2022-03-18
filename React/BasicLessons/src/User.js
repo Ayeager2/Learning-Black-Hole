@@ -6,6 +6,7 @@ Promise.config({cancellation:true});
 
 function fetchUser(){
     return new Promise(resolve => {
+        console.count('fetching user');
         setTimeout(() => {
             resolve({id:1, name:"Adam"})
         }, 1000);
@@ -24,7 +25,7 @@ export default function User() {
         return() => {
             promise.cancel();
         };
-    });
+    }, []);
     
     return(
 
