@@ -1,0 +1,37 @@
+-Div is a root component for rendering, the other tags are its children. Will learn how to render adjacent elements without wrapping them in an parent element.
+-Tag names are case-sensitive and non-HTML elements are capitalized.
+
+Rendering with JSX
+
+-We create new JSX elements so that we can encapsulate larger structures so you can use custom tags. The react component returns the JSX that goes where the tag is used.
+-Namespaced Components: a namespaces provides and organizational unit fro your components so that related components can share the same namespace prefix. The idea of namespaced is to have a namespace component render its child components using the namespace syntax.
+-JSX has a special syntax that allows you to embed JavaScript expressions. Anytime React renders JSX content, expressions in the markup are evaluated.This is the dynamic aspect of JSX.
+-React evaluates expressions and updates the HTML content based on what has already been rendered and what has changed.
+-Fragments are a way to group together chunks of markup without having to add unnecessary structure to your page.
+
+Component Properties, State, and Context
+
+-State is the dynamic part of a React component. You can declare the initial state of a component, which changes over 
+time.
+-Properties(props) are used to pass data into your React components. Instead of calling a method with a new state as teh argument, properties are passed only when the component is rendered.
+-The initial state of a component isn't actually required, but if your component uses state, it should be set.
+-The initial state of a component should always ben an object with one or more properties. 
+-Properties are immutable, and there's no need for them to be kept as an instance property value. State, on the other hand, changes all the time, so the component needs an instance-level reference to it.
+-You can pass just about anything you want as a property value via JSX, just as long as it's a valid JavaScript expression.
+-A pure function is a function without side effects. That is to say, called with a given set of arguments, the function always produces the same output. This is relevant for React components because, given a set of properties, it's easier to predict what the rendered content will be. Functions that always return the same value with a given argument values are easier to test as well.
+-The basic premise of container components is simple: don't couple data fetching with the component that renders the data. The container is responsible for fetching the data and passing it to its child component. It contains the component responsible for rendering the data.
+
+Getting Started with Hooks
+
+-When our components are first rendered, they probably expect some state values to be set. This is called the initial state of the component, and we can use the useState() Hook to set the initial state.
+-You can have as many pieces of state in your component as you need. The best practice is to have one call to useState() per state value.
+-When we call useState(), we get an array returned to us. The first value of this array is the state value itself.
+-With functional components that use the useState() Hook, state values are updated differently to class components that rely on the setState() method. Instead of using setState() to update every piece of component state, you have individual functions to set each state value. The useState() Hook returns an array. The first item is the state value and the second is the function used to update the value.
+-The useEffect() Hook is used to run "side-effects" in your component.
+-By default, React assumes that every effect that is run needs to be cleaned up. This typically isn't the case. For example, you might have specific property or state values that require cleanup when they change. You can pass an array of values to watch as the second argument to useEffect().
+-React applications often have a few pieces of data that are global in nature. This means that several components, possibly every component in the app, share this data. 
+-Most of our components will directly fetch the data that they and their children need. In other cases, our app has some API endpoint with data that is used by several components throughout the application. To share global data like this, you can use the React context API. As the name suggests, components that are rendered within a context are able to access the data provided by the context.
+-A reducer function in a React application is a function that takes the current state, an action, and any other arguments that are needed to update the state. It returns the new state of the component. The action argument tells the reducer function what new state to return and is often used in a switch statement.
+-When our components have one piece of state that depends on another, it's difficult to use the useState() Hook. This Hook comes with the assumption that when a state needs to be updated, it's one piece at a time. In real applications, there are often scenarios where updating one piece of state means that another piece of state needs to be updated as well, based on this new value.
+
+
