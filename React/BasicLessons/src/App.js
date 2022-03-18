@@ -1,28 +1,17 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, {Fragment, useState} from 'react';
+import User from './User';
 
-function fetchUser(){
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve({id: 1, name:'Adam'});
-        }, 1000);
-    });
-}
+const ShowHideUser = ({show}) => (show ? <User /> : null);
 
 export default function App(){
-    const [id, setId] = useState('loading...');
-    const [name, setName] = useState('loading...');
-
-    useEffect(()=> {
-        fetchUser().then(user => {
-            setId(user.id);
-            setName(user.name);
-        });
-    });
+    const [show, setShow] = useState(false);
 
     return(
         <Fragment>
-            <p>ID: {id}</p>
-            <p>Name: {name}</p>
+            <button onClick={()=> setShow(!show)}>
+                {show ? 'Hide User' : 'Show User'}
+            </button>
+            <ShowHideUser show={show}/>
         </Fragment>
     )
 }
