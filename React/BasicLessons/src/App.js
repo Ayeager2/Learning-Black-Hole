@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
-import { StatusProvider } from './StatusContext';
-import { Page1, Page2, Page3, Status } from './Pages';
+import React, { Fragment, useReducer } from "react";
 
-function ChoosePage({ page }) {
-  const Page = [Page1, Page2, Page3][page];
-  return <Page />;
+function reducer(state, action) {
+  switch (action.type) {
+    case "changeName":
+      return { ...state, name: action.value };
+    case "changeAge":
+      return { ...state, age: action.value };
+    default:
+      throw new Error(`${action.type} is not a valid action`);
+  }
 }
 
-function App() {
-  const [page, setPage] = useState(0);
+export default function App() {
+  const [{ name, age }, dispatch] = useReducer(reducer, {});
 
   return (
-    <StatusProvider>
-      <button onClick={() => setPage(0)} disabled={page === 0}>
-        Page 1
-      </button>
-      <button onClick={() => setPage(1)} disabled={page === 1}>
-        Page 2
-      </button>
-      <button onClick={() => setPage(2)} disabled={page === 2}>
-        Page 3
-      </button>
-      <ChoosePage page={page} />
-      <Status />
-    </StatusProvider>
+    <Fragment>
+      <input
+        placeholder="Name"
+        value={name}
+        onChange={e => dispatch({ type: "changeName", value: e.target.value })}
+      />
+      <p>Name: {name}</p>
+      <input
+        placeholder="Age"
+        type="number"
+        value={age}
+        onChange={e => dispatch({ type: "changeAge", value: e.target.value })}
+      />
+      <p>Age: {age}</p>
+    </Fragment>
   );
 }
-
-export default App;
