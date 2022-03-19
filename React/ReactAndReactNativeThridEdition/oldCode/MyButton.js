@@ -1,13 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-const MyButton = ({disabled, text}) => (
-    <button disabled={disabled}>{text}</button>
-);
+function fetchData() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
+}
 
+export default class MyButton extends Component {
+  onClick(e) {
+    console.log("clicked", e.currentTarget.style);
 
-MyButton.defaultProps = {
-    text: 'My Button',
-    disabled:false
-};
+    fetchData().then(() => {
+      console.log("callback", e.currentTarget.style);
+    });
+  }
 
-export default MyButton;
+  render() {
+    return <button onClick={this.onClick}>{this.props.children}</button>;
+  }
+}
