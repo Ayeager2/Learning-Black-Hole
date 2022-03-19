@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-const MyButton = ({disabled, text}) => (
-    <button disabled={disabled}>{text}</button>
-);
+export default class MyButton extends Component {
+  onClick() {
+    console.log("clicked");
+  }
 
-
-MyButton.defaultProps = {
-    text: 'My Button',
-    disabled:false
-};
-
-export default MyButton;
+  render() {
+    return <button onClick={this.onClick}>{this.props.children}</button>;
+  }
+}
