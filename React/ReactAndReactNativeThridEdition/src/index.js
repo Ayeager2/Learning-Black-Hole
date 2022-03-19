@@ -1,9 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import { render } from "react-dom";
+import MyButton from "./MyButton";
 
-import MyButton from './MyButton';
-
-render(
-  <MyButton>Click Me</MyButton>,
-  document.getElementById('root')
-);
+render(<MyButton>Click Me</MyButton>, document.getElementById("root"));
