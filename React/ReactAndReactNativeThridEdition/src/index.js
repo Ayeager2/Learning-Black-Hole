@@ -1,5 +1,14 @@
 import React from "react";
-import { render } from "react-dom";
-import UserListContainer from "./UserListContainer";
+import { render as renderJSX } from "react-dom";
+import MyFeature from "./MyFeature";
 
-render(<UserListContainer />, document.getElementById("root"));
+let disabled = true;
+
+function render() {
+  disabled = !disabled;
+
+  renderJSX(<MyFeature {...{ disabled }} />, document.getElementById("root"));
+}
+
+setInterval(render, 3000);
+render();
