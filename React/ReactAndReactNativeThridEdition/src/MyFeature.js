@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import ArticleList from "./ArticleList";
+import AddArticle from "./AddArticle";
 
 const id = (function*() {
   let i = 1;
@@ -90,44 +92,19 @@ export default class MyFeature extends Component {
 
     return (
       <section>
-        <header>
-          <h1>Articles</h1>
-          <input
-            placeholder="Title"
-            value={title}
-            onChange={this.onChangeTitle}
-          />
-          <input
-            placeholder="Summary"
-            value={summary}
-            onChange={this.onChangeSummary}
-          />
-          <button onClick={this.onClickAdd}>Add</button>
-        </header>
-        <article>
-          <ul>
-            {articles.map(i => (
-              <li key={i.id}>
-                <a
-                  href={`#${i.id}`}
-                  title="Toggle Summary"
-                  onClick={this.onClickToggle.bind(null, i.id)}
-                >
-                  {i.title}
-                </a>
-                &nbsp;
-                <a
-                  href={`#${i.id}`}
-                  title="Remove"
-                  onClick={this.onClickRemove.bind(null, i.id)}
-                >
-                  &#10007;
-                </a>
-                <p style={{ display: i.display }}>{i.summary}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
+        <AddArticle
+          name="Articles"
+          title={title}
+          summary={summary}
+          onChangeTitle={this.onChangeTitle}
+          onChangeSummary={this.onChangeSummary}
+          onClickAdd={this.onClickAdd}
+        />
+        <ArticleList
+          articles={articles}
+          onClickToggle={this.onClickToggle}
+          onClickRemove={this.onClickRemove}
+        />
       </section>
     );
   }
