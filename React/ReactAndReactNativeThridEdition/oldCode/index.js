@@ -1,5 +1,34 @@
 import React from "react";
 import { render } from "react-dom";
-import MyButton from "./MyButton";
+import ArticleList from "./ArticleList";
+import AddArticle from "./AddArticle";
+import MyFeature from "./MyFeature";
 
-render(<MyButton>Click Me</MyButton>, document.getElementById("root"));
+render(
+  <MyFeature
+    addArticle={({
+      title,
+      summary,
+      onChangeTitle,
+      onChangeSummary,
+      onClickAdd
+    }) => (
+      <AddArticle
+        name="Articles"
+        title={title}
+        summary={summary}
+        onChangeTitle={onChangeTitle}
+        onChangeSummary={onChangeSummary}
+        onClickAdd={onClickAdd}
+      />
+    )}
+    articleList={({ articles, onClickToggle, onClickRemove }) => (
+      <ArticleList
+        articles={articles}
+        onClickToggle={onClickToggle}
+        onClickRemove={onClickRemove}
+      />
+    )}
+  />,
+  document.getElementById("root")
+);
