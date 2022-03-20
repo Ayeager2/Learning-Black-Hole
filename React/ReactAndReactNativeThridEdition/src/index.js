@@ -1,14 +1,20 @@
 import React from "react";
-import { render as renderJSX } from "react-dom";
-import MyFeature from "./MyFeature";
+import { render } from "react-dom";
+import MyButtonContainer from "./MyButtonContainer";
 
-let disabled = true;
-
-function render() {
-  disabled = !disabled;
-
-  renderJSX(<MyFeature {...{ disabled }} />, document.getElementById("root"));
+function onClick() {
+  this.setState({ disabled: true });
 }
 
-setInterval(render, 3000);
-render();
+render(
+  <section>
+    <MyButtonContainer label="Text" />
+    <MyButtonContainer
+      label="My Button"
+      icon="ui-icon-person"
+      showLabel={false}
+    />
+    <MyButtonContainer label="Disable Me" onClick={onClick} />
+  </section>,
+  document.getElementById("root")
+);

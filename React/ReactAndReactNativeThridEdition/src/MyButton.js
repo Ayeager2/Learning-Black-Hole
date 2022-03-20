@@ -1,10 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
+import $ from "jquery";
+import "jquery-ui/ui/widgets/button";
+import "jquery-ui/themes/base/all.css";
 
-export default ({ clicks, disabled, text, onClick }) => (
-  <section>
-    <p>{clicks} clicks</p>
-    <button disabled={disabled} onClick={onClick}>
-      {text}
-    </button>
-  </section>
-);
+export default class MyButton extends Component {
+  componentDidMount() {
+    $(this.button).button(this.props);
+  }
+
+  componentDidUpdate() {
+    $(this.button).button("option", this.props);
+  }
+
+  render() {
+    return (
+      <button
+        onClick={this.props.onClick}
+        ref={button => {
+          this.button = button;
+        }}
+      />
+    );
+  }
+}
