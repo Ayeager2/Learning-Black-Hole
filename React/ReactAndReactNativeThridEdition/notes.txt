@@ -33,5 +33,19 @@ Getting Started with Hooks
 -Most of our components will directly fetch the data that they and their children need. In other cases, our app has some API endpoint with data that is used by several components throughout the application. To share global data like this, you can use the React context API. As the name suggests, components that are rendered within a context are able to access the data provided by the context.
 -A reducer function in a React application is a function that takes the current state, an action, and any other arguments that are needed to update the state. It returns the new state of the component. The action argument tells the reducer function what new state to return and is often used in a switch statement.
 -When our components have one piece of state that depends on another, it's difficult to use the useState() Hook. This Hook comes with the assumption that when a state needs to be updated, it's one piece at a time. In real applications, there are often scenarios where updating one piece of state means that another piece of state needs to be updated as well, based on this new value.
+- Utility-centric HTML elements are more reusable
+than feature-centric HTML elements.
 
+Crafting Reusable Components
 
+-. Having monolithic feature
+components makes it difficult to coordinate any kind of team development effort. The
+bigger monolithic components become, the more difficult they are to refactor into
+something better later on.
+-The JSX of any monolithic component is the best starting point for figuring out how to
+refactor it into smaller components. 
+-Whenever you come across components
+that only use property values, it's a good idea to make them functional. For one thing, it
+makes it explicit that the component doesn't rely on any state or life cycle methods. It's also
+more efficient because React doesn't perform as much work when it detects that a
+component is a function.
