@@ -1,12 +1,8 @@
-import { Promise } from "bluebird";
-
-Promise.config({ cancellation: true });
-
 export function users(fail) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fail) {
-        reject(fail);
+        reject("epic fail");
       } else {
         resolve({
           users: [
@@ -16,6 +12,6 @@ export function users(fail) {
           ]
         });
       }
-    }, 4000);
+    }, 2000);
   });
 }

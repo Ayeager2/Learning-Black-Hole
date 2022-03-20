@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { users } from "./api";
 import UserList from "./UserList";
-
-const onClickCancel = e => {
-  e.preventDefault();
-  render(<p>Cancelled</p>, document.getElementById("root"));
-};
 
 export default class UserListContainer extends Component {
   state = {
@@ -16,24 +10,20 @@ export default class UserListContainer extends Component {
   };
 
   componentDidMount() {
-    this.job = users();
-
-    this.job.then(
+    users(false).then(
       result => {
         this.setState({ loading: null, error: null, users: result.users });
       },
-
       error => {
-        this.setState({ loading: null, error: error.message });
+        this.setState({ loading: null, error });
       }
     );
   }
 
-  componentWillUnmount() {
-    this.job.cancel();
-  }
-
   render() {
-    return <UserList onClickCancel={onClickCancel} {...this.state} />;
+    if (this.state.error !== null) {
+      throw new Error(this.state.error);
+    }
+    return <UserList {...this.state} />;
   }
 }

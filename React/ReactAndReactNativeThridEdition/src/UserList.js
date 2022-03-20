@@ -1,23 +1,14 @@
 import React from "react";
 
-const ErrorMessage = ({ error }) => (error ? <strong>{error}</strong> : null);
 const LoadingMessage = ({ loading }) => (loading ? <em>{loading}</em> : null);
-const CancelLink = ({ loading, onClick }) =>
-  loading ? (
-    <a href="#cancel" onClick={onClick}>
-      Cancel
-    </a>
-  ) : null;
 
-export default ({ error, loading, users, onClickCancel }) => (
+export default ({ error, loading, users }) => (
   <section>
-    <ErrorMessage error={error} />
     <LoadingMessage loading={loading} />
     <ul>
-      {users.map(i => (
-        <li key={i.id}>{i.name}</li>
+      {users.map(user => (
+        <li key={user.id.toUpperCase()}>{user.name}</li>
       ))}
     </ul>
-    <CancelLink loading={loading} onClick={onClickCancel} />
   </section>
 );
