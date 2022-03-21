@@ -1,11 +1,10 @@
-import React, { Suspense, lazy } from "react";
-
-const MyComponent = lazy(() => import("./MyComponent"));
+import React, { Suspense } from "react";
+import MyPage from "./MyPage";
 
 export default function App() {
   return (
     <Suspense fallback={"loading..."}>
-      <MyComponent />
+      <MyPage />
     </Suspense>
   );
 }
