@@ -145,5 +145,69 @@ This method returns a promise that resolves when all of the promises that are pa
 two promises to Promise.all(). The first is the promise returned by import(), which eventually resolves the module object from the code bundle once it's
 downloaded. The problem is that this resolves immediately when doing local development.
 The second promise that's passed to Promise.all() is how we simulate latency, by not
-resolving the promise for three seconds (normally to simulate an import function)
+resolving the promise for three seconds (normally to simulate an import function).
+-The fallback property can be any valid
+React element, which means that we can enhance the fallback to be something more
+visually appealing. For example, the react-spinners package has a selection of spinner
+components, all of which can be used as a fallback with Suspense.
+    *The react-spinners package has
+        several spinners for you to choose from, each of which has a number of configuration
+        options. There are other spinner libraries that you can use or you can implement your own.
+-It might be tempting to make most of your React components lazy components that live in
+their own bundle. After all, there isn't much extra work that needs to happen in order to set
+up separate bundles and to make lazy components. There are some downsides to this
+though. If you have too many lazy components, your app is going to end up making
+several HTTP requests to fetch them – at the same time. There's no benefit to having
+separate bundles for components that are used on the same part of the app. You're better
+off trying to bundle components together in a way that one HTTP request is made to load
+what is needed on the current page.
+-A helpful way to think of this is to associate "pages" with bundles. If you have lazy page
+components, then everything on that page will also be lazy, yet bundled together with
+other components on the page.
 
+Server-Side React Components
+
+*-Another term for server-side rendering is isomorphic JavaScript.-*
+-This is a fancy way of saying JavaScript code that can run in the browser and in Node.js 
+without modification. 
+-The beauty of React is that it's a small abstraction layer that sits on top of a rendering target.
+So far, the target has been the browser, but it can also be the server. The render target can
+be anything, just as long as the correct translation calls are implemented behind the scenes.
+-In the case of rendering on the server, components are rendered to strings. The server can't
+actually display rendered HTML; all it can do is send the rendered markup to the browser.
+-The main motivation behind server-side rendering is improved
+performance. In particular, the initial rendering just feels faster for the user and this
+translates to an overall better user experience. It doesn't matter how fast your application is
+once it's loaded and ready to go; it's the initial load time that leaves a lasting impression on
+your users.
+
+-There are three ways in which this approach results in better performance for the initial
+load:
+    *The rendering that takes place on the server is generating a string; there's no
+    need to compute a difference or to interact with the DOM in any way. Producing
+    a string of rendered markup is inherently faster than rendering components in
+    the browser.
+    *The rendered HTML is displayed as soon as it arrives. Any JavaScript code that
+    needs to run on the initial load is run after the user is already looking at the
+    content.
+    *There are fewer network requests to fetch data from the API because these have
+    already happened on the server, and the server, typically, has far more resources
+    than a single client.
+-There's a good chance that your application will need to talk to API endpoints that are out
+of your control, for example, an application that is composed of many different
+microservice endpoints. It's rare that you can use data from these services without
+modification. Rather, you have to write code that transforms data so that it's usable by your
+React components
+-If you're rendering your components on a Node.js server, then this data transformation
+code will be used by both the client and the server. This is because, on the initial load, the
+server will need to talk to the API and, later on, the component in the browser will need to
+talk to the API.
+    -It's not just about transforming the data that's returned from these services either. For
+    example, you have to think about providing input to them as well, such as when creating or
+    modifying resources.
+    -The fundamental adjustment that you'll need to make as a React programmer is to assume
+    that any given component that you implement will need to be rendered on the server. This
+    may seem like a minor adjustment, but the devil is in the detail
+-Rendering components in Node.js means rendering to strings, instead of trying to figure
+out the best way to insert them into the DOM. The string content is then returned to the
+browser, which displays this to the user immediately. 
