@@ -49,3 +49,29 @@ that only use property values, it's a good idea to make them functional. For one
 makes it explicit that the component doesn't rely on any state or life cycle methods. It's also
 more efficient because React doesn't perform as much work when it detects that a
 component is a function.
+
+The React Component Life Cycle
+-Initial Render LifeCycle
+    -getDerivedStateFromProps()
+    -render()
+    -componentDidMount()
+-Update LifeCycle
+    -getDerivedStateFromProps()
+    -shouldComponentUpdate()
+    -render()
+    -getSnapshotBeforeUpdate()
+    -componentDidUpdate
+
+-These are the two main life cycle flows of a React component. The first happens when the component is initially rendered. The second happens whenever the component is updated.
+    *getDerivedStateFromProps(): This method allows you to update the state of the component based on the property values of the component. This method is called when the component is initially rendered and when it receives new property values.
+    *render(): Returns the content to be rendered by the component. This is called when the component is first mounted to the DOM, when it receives new property values, and when setState() is called.
+    *componentDidMount(): This is called after the component is mounted to the DOM. This is where you can perform component initialization work, such as fetching data.
+    *shouldComponentUpdate(): You can use this method to compare new states or props with current states or props. Then, you can return false if there's no need to re-render the component. This method is used to make your components more efficient.
+    *getSnapshotBeforeUpdate(): This method lets you perform operations directly on the DOM elements of your component before they're actually committed to the DOM. The difference between this method and render() is that getSnapshotBeforeUpdate() isn't asynchronous. With render(), there's a good chance that the DOM structure could change between when it's called and when the changes are actually made in the DOM.
+    *componentDidUpdate(): This is called when the component is updated. It's rare that you'll have to use this method.
+    *componentWillUnmount(). This is the only life cycle method that's called when a component is about to be removed.
+-When your components are initialized, you'll want to populate their state or properties. Otherwise, the component won't have anything to render other than its skeleton markup.
+-Due to the naming of componentDidMount(), React newcomers think that it's bad to wait until the component is mounted to the DOM before issuing requests for component data. In other words, the user experience might suffer if React has to perform a lot of work before the request is even sent. In reality, fetching data is an asynchronous task and initiating it before or after render() makes no real difference as far as your application is concerned.
+    *https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
+    *React.Component: https://reactjs.org/docs/react-component.html 
+    *State and Lifecycle: https://reactjs.org/docs/state-and-lifecycle.html
