@@ -1,17 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function MyComponent({ label, value, max }) {
+export default function MyComponent({ myHeader, myContent }) {
   return (
     <section>
-      <h5>{label}</h5>
-      <progress {...{ max, value }} />
+      <header>{myHeader}</header>
+      <main>{myContent}</main>
     </section>
   );
 }
 
 MyComponent.propTypes = {
-  label: PropTypes.any,
-  value: PropTypes.any,
-  max: PropTypes.any
+  myHeader: PropTypes.element.isRequired,
+  myContent: PropTypes.node.isRequired
 };
