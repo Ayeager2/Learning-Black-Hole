@@ -1,35 +1,48 @@
-import React, { Fragment, Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
 
-const First = lazy(() => import("./First"));
-const Second = lazy(() => import("./Second"));
+const First = lazy(() =>
+  Promise.all([
+    import("./First"),
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    })
+  ]).then(([m]) => m)
+);
 
-function ShowComponent({ name }) {
-  switch (name) {
-    case "first":
-      return <First />;
-    case "second":
-      return <Second />;
-    default:
-      return null;
-  }
-}
+const Second = lazy(() =>
+  Promise.all([
+    import("./Second"),
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    })
+  ]).then(([m]) => m)
+);
 
 export default function App() {
-  const [component, setComponent] = useState("");
-
   return (
-    <Fragment>
-      <label>
-        Load Component:{" "}
-        <select value={component} onChange={e => setComponent(e.target.value)}>
-          <option value="">None</option>
-          <option value="first">First</option>
-          <option value="second">Second</option>
-        </select>
-      </label>
-      <Suspense fallback="loading...">
-        <ShowComponent name={component} />
-      </Suspense>
-    </Fragment>
+    <Router>
+      <section>
+        <nav>
+          <p>
+            <Link to="first">First</Link>
+          </p>
+          <p>
+            <Link to="second">Second</Link>
+          </p>
+        </nav>
+        <section>
+          <Suspense fallback={<FadeLoader color={"lightblue"} size={150} />}>
+            <Route path="/first" component={First} />
+            <Route path="/second" component={Second} />
+          </Suspense>
+        </section>
+      </section>
+    </Router>
   );
 }

@@ -105,5 +105,45 @@ Handling Navigation with Routes
 -Almost every web application requires routing: the process of responding to a URL, based
 on a set of route handler declarations. In other words, this is a mapping from the URL to
 rendered content.
+-With react-router, you can collocate routes with the content that they render. In this
+section, you'll see that this is done using JSX syntax that defines routes.
+    *https://reactrouter.com/
+    *https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
+Code Splitting Using Lazy Components and Suspense
+
+-Code splitting is
+necessary when you have larger applications with a lot of JavaScript code that must be
+delivered to the browser.
+-Big monolithic JavaScript bundles that house the entire application can create usability
+issues on initial page loads due to longer load times. With code splitting, we have more
+fine-grained control over how code makes its way from the server to the browser.
+-The code examples are using the create-react-app tooling for creating bundles.
+The nice thing about this approach is that you don't have to maintain any sort of bundle
+configuration. Instead, bundles are created for you automatically, based on how you import
+your modules. If you're using the import statement everywhere, your app will be
+downloaded all at once in one bundle. When your app gets bigger, there are likely going to
+be features that some users never use or don't use as frequently as others. You can use the
+import() function to import modules on demand. By using this function, you're telling
+webpack to create a separate bundle for the code that you're importing dynamically.
+-Instead of manually handling the promise returned by import() by returning the default
+export and setting state, you can lean on the lazy() API. This function takes a function
+that returns an import() promise. The return value is a lazy component that you can just
+render.
+-The Suspense component compliments lazy components by providing a fallback
+to display while the code bundle is being fetched.
+-Lazy components need to be rendered inside of a Suspense component. They do not have
+to be direct children of Suspense though, which is important because this means that you
+can have one Suspense component handle every lazy component in your app. 
+-The whole idea with the lazy() and Suspense APIs is to provide a better user experience
+for both of the following:
+    *The initial load, by splitting code into bundles so that the whole app doesn't have
+        to be downloaded upfront
+    *Providing consistent fallback content while code bundles load
+-Instead of just returning the promise from import(), you can build a new promise using Promise.all(). 
+This method returns a promise that resolves when all of the promises that are passed to it have resolved. You can pass
+two promises to Promise.all(). The first is the promise returned by import(), which eventually resolves the module object from the code bundle once it's
+downloaded. The problem is that this resolves immediately when doing local development.
+The second promise that's passed to Promise.all() is how we simulate latency, by not
+resolving the promise for three seconds (normally to simulate an import function)
 
