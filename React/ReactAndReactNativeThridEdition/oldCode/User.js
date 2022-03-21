@@ -1,37 +1,28 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { Promise} from "bluebird";
+const Error = ({ error }) =>
+  error ? (
+    <p>
+      <strong>{error}</strong>
+    </p>
+  ) : null;
+const Text = ({ children }) => (children ? <p>{children}</p> : null);
 
-Promise.config({cancellation:true});
-
-function fetchUser(){
-    return new Promise(resolve => {
-        console.count('fetching user');
-        setTimeout(() => {
-            resolve({id:1, name:"Adam"})
-        }, 1000);
-    });
+export default function User({ error, first, last, age }) {
+  return (
+    <section>
+      <Error error={error} />
+      <Text>{first}</Text>
+      <Text>{last}</Text>
+      <Text>{age}</Text>
+    </section>
+  );
 }
 
-export default function User() {
-    const [id, setId] = useState("loading...");
-    const [name, setName] = useState("loading...");
-
-    useEffect(()=>{
-        const promise = fetchUser ().then(user => {
-            setId(user.id);
-            setName(user.name);
-        })
-        return() => {
-            promise.cancel();
-        };
-    }, []);
-    
-    return(
-
-        <Fragment>
-        <p>ID: {id}</p>
-        <p>Name: {name}</p>
-    </Fragment>
-        )
-}
+User.propTypes = {
+  error: PropTypes.string,
+  first: PropTypes.string,
+  last: PropTypes.string,
+  age: PropTypes.number
+};

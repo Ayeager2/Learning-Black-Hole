@@ -1,17 +1,7 @@
-export function users(fail) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (fail) {
-        reject("epic fail");
-      } else {
-        resolve({
-          users: [
-            { id: 0, name: "First" },
-            { id: 1, name: "Second" },
-            { id: 2, name: "Third" }
-          ]
-        });
-      }
-    }, 2000);
+const users = ["User 1", "User 2", "User 3"];
+
+export function fetchUsers(desc) {
+  return new Promise(resolve => {
+    resolve(desc ? users.slice(0).reverse() : users);
   });
 }

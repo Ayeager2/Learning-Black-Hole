@@ -75,3 +75,35 @@ The React Component Life Cycle
     *https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
     *React.Component: https://reactjs.org/docs/react-component.html 
     *State and Lifecycle: https://reactjs.org/docs/state-and-lifecycle.html
+
+Validating Component Properties
+
+-Property validation in React components is like field validation in HTML forms.Property
+validation enhances the developer experience, rather than the user experience.
+-The key aspect of property validation is knowing what's passed into the component as a
+property value.
+-The idea isn't to fail fast with property validation. It's to provide information to the
+developer. When property validation fails, you know that something was provided as a
+component property that shouldn't have been. It's a matter of finding where the value is
+passed in the code and fixing it.
+    -Fail fast is an architectural property of software in which the system will
+crash completely rather than continue running in an inconsistent state
+-When you know what to expect from your component properties, the context in which the
+component is used becomes less important. This means that as long as the component is
+able to validate its property values, it really shouldn't matter where the component is used;
+it could easily be used by any feature.
+-Using React-style property validation, you can avoid writing defensive code.
+    -Defensive code is code that needs to account for a number of edge cases
+        during runtime, in a production environment. Coding defensively is
+        necessary when potential problems cannot be detected during
+        development, such as with React component property validation.
+
+    *https://reactjs.org/docs/typechecking-with-proptypes.html
+
+Handling Navigation with Routes
+
+-Almost every web application requires routing: the process of responding to a URL, based
+on a set of route handler declarations. In other words, this is a mapping from the URL to
+rendered content.
+
+

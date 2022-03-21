@@ -1,32 +1,9 @@
 import React from "react";
-import { Router, Route, browserHistory } from "react-router";
-import App from "./App";
-import UsersHeader from "./users/UsersHeader";
-import UsersMain from "./users/UsersMain";
-import GroupsHeader from "./groups/GroupsHeader";
-import GroupsMain from "./groups/GroupsMain";
-
-const users = {
-  path: "users",
-  components: {
-    header: UsersHeader,
-    main: UsersMain
-  }
-};
-
-const groups = {
-  path: "groups",
-  components: {
-    header: GroupsHeader,
-    main: GroupsMain
-  }
-};
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UsersContainer from "./UsersContainer";
 
 export default (
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Route {...users} />
-      <Route {...groups} />
-    </Route>
+  <Router>
+    <Route path="/users(/:desc)" component={UsersContainer} />
   </Router>
 );
