@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
+
+const MyComponent = lazy(() => import("./MyComponent"));
 
 export default function App() {
-  const [MyComponent, setMyComponent] = useState(() => () => null);
-
-  useEffect(() => {
-    import("./MyComponent").then(module => {
-      setMyComponent(() => module.default);
-    });
-  }, []);
-
-  return <MyComponent />;
+  return (
+    <Suspense fallback={"loading..."}>
+      <MyComponent />
+    </Suspense>
+  );
 }
