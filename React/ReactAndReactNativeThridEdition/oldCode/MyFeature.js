@@ -1,92 +1,26 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import MyButton from "./MyButton";
 
-const id = (function*() {
-  let i = 1;
-  while (true) {
-    yield i;
-    i += 1;
-  }
-})();
+export default class MyFeature extends Component {
+  state = {
+    clicks: 0,
+    disabled: false,
+    text: ""
+  };
 
-export default function MyFeature({ addArticle, articleList }) {
-  const [articles, setArticles] = useState([
-    {
-      id: id.next(),
-      title: "Article 1",
-      summary: "Article 1 Summary",
-      display: "none"
-    },
-    {
-      id: id.next(),
-      title: "Article 2",
-      summary: "Article 2 Summary",
-      display: "none"
-    },
-    {
-      id: id.next(),
-      title: "Article 3",
-      summary: "Article 3 Summary",
-      display: "none"
-    },
-    {
-      id: id.next(),
-      title: "Article 4",
-      summary: "Article 4 Summary",
-      display: "none"
-    }
-  ]);
+  onClick = () => {
+    this.setState(state => ({ ...state, clicks: state.clicks + 1 }));
+  };
 
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-
-  function onChangeTitle(e) {
-    setTitle(e.target.value);
+  render() {
+    return <MyButton onClick={this.onClick} {...this.state} />;
   }
 
-  function onChangeSummary(e) {
-    setSummary(e.target.value);
+  static getDerivedStateFromProps({ disabled, text }, state) {
+    return { ...state, disabled, text };
   }
-
-  function onClickAdd() {
-    setArticles([
-      ...articles,
-      {
-        id: id.next(),
-        title: title,
-        summary: summary,
-        display: "none"
-      }
-    ]);
-    setTitle("");
-    setSummary("");
-  }
-
-  function onClickRemove(id) {
-    setArticles(articles.filter(article => article.id !== id));
-  }
-
-  function onClickToggle(id) {
-    const index = articles.findIndex(article => article.id === id);
-    const updatedArticles = [...articles];
-
-    updatedArticles[index] = {
-      ...articles[index],
-      display: articles[index].display ? "" : "none"
-    };
-
-    setArticles(updatedArticles);
-  }
-
-  return (
-    <section>
-      {addArticle({
-        title,
-        summary,
-        onChangeTitle,
-        onChangeSummary,
-        onClickAdd
-      })}
-      {articleList({ articles, onClickToggle, onClickRemove })}
-    </section>
-  );
 }
+
+MyFeature.defaultProps = {
+  text: "A Button"
+};

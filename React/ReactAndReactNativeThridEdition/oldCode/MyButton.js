@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-
-function fetchData() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
-}
+import $ from "jquery";
+import "jquery-ui/ui/widgets/button";
+import "jquery-ui/themes/base/all.css";
 
 export default class MyButton extends Component {
-  onClick(e) {
-    console.log("clicked", e.currentTarget.style);
+  componentDidMount() {
+    $(this.button).button(this.props);
+  }
 
-    fetchData().then(() => {
-      console.log("callback", e.currentTarget.style);
-    });
+  componentDidUpdate() {
+    $(this.button).button("option", this.props);
   }
 
   render() {
-    return <button onClick={this.onClick}>{this.props.children}</button>;
+    return (
+      <button
+        onClick={this.props.onClick}
+        ref={button => {
+          this.button = button;
+        }}
+      />
+    );
   }
 }

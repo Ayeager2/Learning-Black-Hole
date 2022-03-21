@@ -1,23 +1,36 @@
 import React, { Component } from "react";
 
-export default class MyList extends Component {
-  constructor() {
-    super();
-    this.onClick = this.onClick.bind(this);
-  }
+function referenceEquality(arr1, arr2) {
+  return arr1 === arr2;
+}
 
-  onClick(id) {
-    const { name } = this.props.items.find(i => i.id === id);
-    console.log("clicked", `"${name}"`);
+function valueEquality(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export default class MyList extends Component {
+  state = {
+    items: new Array(5000).fill(null).map((v, i) => i)
+  };
+
+  shouldComponentUpdate(props, state) {
+    if (!referenceEquality(this.state.items, state.items)) {
+      return !valueEquality(this.state.items, state.items);
+    }
+
+    return false;
   }
 
   render() {
     return (
       <ul>
-        {this.props.items.map(({ id, name }) => (
-          <li key={id} onClick={this.onClick.bind(null, id)}>
-            {name}
-          </li>
+        {this.state.items.map(item => (
+          <li key={item}>{item}</li>
         ))}
       </ul>
     );
