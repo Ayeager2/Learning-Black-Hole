@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
-import ErrorBoundary from "./ErrorBoundary";
-import UserListContainer from "./UserListContainer";
+import MyComponent from "./MyComponent";
 
 render(
-  <ErrorBoundary>
-    <UserListContainer />
-  </ErrorBoundary>,
+  <section>
+    <MyComponent myArray={["first", "second", "third"]} myNumber={99} />
+    <MyComponent myArray={[]} myNumber={100} />
+  </section>,
   document.getElementById("root")
 );

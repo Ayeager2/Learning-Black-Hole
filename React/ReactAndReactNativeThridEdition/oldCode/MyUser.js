@@ -1,25 +1,19 @@
-import React, { Component } from "react";
+const id = (function*() {
+  let i = 1;
+  while (true) {
+    yield i;
+    i += 1;
+  }
+})();
 
-export default class MyUser extends Component {
-  state = {
-    modified: new Date(),
-    first: "First",
-    last: "Last"
-  };
-
-  shouldComponentUpdate(props, state) {
-    return Number(state.modified) > Number(this.state.modified);
+export default class MyUser {
+  constructor(first, last) {
+    this.id = id.next().value;
+    this.first = first;
+    this.last = last;
   }
 
-  render() {
-    const { modified, first, last } = this.state;
-
-    return (
-      <section>
-        <p>{modified.toLocaleString()}</p>
-        <p>{first}</p>
-        <p>{last}</p>
-      </section>
-    );
+  get name() {
+    return `${this.first} ${this.last}`;
   }
 }

@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
-import MyList from './MyList';
+import React from "react";
 
-function fetchData(){
-    return new Promise(resolve => {
-        setTimeout(()=> {
-            resolve(['First','Second','Third']);
-        }, 2000);
-    });
-}
-export default class MyContainer extends Component {
-    state = {items: []};
-    componentDidMount(){
-        fetchData().then(items => this.setState({items}));
-    }
-    render() {
-        return <MyList {...this.state} />;
-    }
+export default function MyComponent({ myArray, myNumber }) {
+  return (
+    <section>
+      <ul>
+        {myArray.map(i => (
+          <li key={i}>{i}</li>
+        ))}
+      </ul>
+      <p>{myNumber}</p>
+    </section>
+  );
 }
 
+MyComponent.propTypes = {
+  myArray: (props, name, component) =>
+    Array.isArray(props[name]) && props[name].length
+      ? null
+      : new Error(`${component}.${name}: expecting non-empty array`),
+
+  myNumber: (props, name, component) =>
+    Number.isFinite(props[name]) && props[name] > 0 && props[name] < 100
+      ? null
+      : new Error(`${component}.${name}: expecting number between 1 and 99`)
+};
