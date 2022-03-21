@@ -1,28 +1,50 @@
-import React, { Fragment, Component } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import UsersHeader from "./users/UsersHeader";
+import UsersMain from "./users/UsersMain";
+import GroupsHeader from "./groups/GroupsHeader";
+import GroupsMain from "./groups/GroupsMain";
 
-export default class App extends Component {
-  state = {
-    first: 0,
-    second: 0,
-    third: 0
-  };
-
-  onClick = name => () => {
-    this.setState(state => ({
-      ...state,
-      [name]: state[name] + 1
-    }));
-  };
-
-  render() {
-    const { first, second, third } = this.state;
-
-    return (
-      <Fragment>
-        <button onClick={this.onClick("first")}>First {first}</button>
-        <button onClick={this.onClick("second")}>Second {second}</button>
-        <button onClick={this.onClick("third")}>Third {third}</button>
-      </Fragment>
-    );
-  }
+export default function App() {
+  return (
+    <Router>
+      <section>
+        <nav>
+          <NavLink
+            exact
+            to="/"
+            style={{ padding: "0 10px" }}
+            activeStyle={{ fontWeight: "bold" }}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            exact
+            to="/users"
+            style={{ padding: "0 10px" }}
+            activeStyle={{ fontWeight: "bold" }}
+          >
+            Users
+          </NavLink>
+          <NavLink
+            exact
+            to="/groups"
+            style={{ padding: "0 10px" }}
+            activeStyle={{ fontWeight: "bold" }}
+          >
+            Groups
+          </NavLink>
+        </nav>
+        <header>
+          <Route exact path="/" render={() => <h1>Home</h1>} />
+          <Route exact path="/users" component={UsersHeader} />
+          <Route exact path="/groups" component={GroupsHeader} />
+        </header>
+        <main>
+          <Route exact path="/users" component={UsersMain} />
+          <Route exact path="/groups" component={GroupsMain} />
+        </main>
+      </section>
+    </Router>
+  );
 }
