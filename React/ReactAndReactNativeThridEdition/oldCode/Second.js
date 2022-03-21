@@ -1,10 +1,5 @@
-import React from 'react';
-import { PermissionConsumer } from './PermissionContext';   
+import React from "react";
 
-export default () => (
-    <PermissionConsumer name="second">
-        <div>
-            <button>Second</button>
-        </div>
-    </PermissionConsumer>
-)
+export default function First() {
+  return <h1>Second</h1>;
+}
