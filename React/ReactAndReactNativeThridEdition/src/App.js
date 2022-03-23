@@ -1,36 +1,16 @@
-import React from "react";
-import { Route, Link } from "react-router-dom";
-
-import FirstHeader from "./first/FirstHeader";
-import FirstContent from "./first/FirstContent";
-import SecondHeader from "./second/SecondHeader";
-import SecondContent from "./second/SecondContent";
+import React, { useState } from "react";
 
 export default function App() {
+  const [clicks, setClicks] = useState(0);
+
   return (
     <section>
       <header>
-        <Route exact path="/" render={() => <h1>App</h1>} />
-        <Route exact path="/first" component={FirstHeader} />
-        <Route exact path="/second" component={SecondHeader} />
+        <h1>Hydrating The Client</h1>
       </header>
       <main>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <ul>
-              <li>
-                <Link to="first">First</Link>
-              </li>
-              <li>
-                <Link to="second">Second</Link>
-              </li>
-            </ul>
-          )}
-        />
-        <Route exact path="/first" component={FirstContent} />
-        <Route exact path="/second" component={SecondContent} />
+        <p>Clicks {clicks}</p>
+        <button onClick={() => setClicks(clicks + 1)}>Click Me</button>
       </main>
     </section>
   );
