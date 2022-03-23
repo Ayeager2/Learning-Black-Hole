@@ -1,76 +1,73 @@
 import "typeface-roboto";
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import First from "./First";
+import Second from "./Second";
+import Third from "./Third";
 
-const headerFooterStyle = {
-  padding: 8,
-  textAlign: "center"
-};
-const mainStyle = {
-  padding: 16,
-  textAlign: "center"
-};
-const navStyle = { marginLeft: 5 };
+export default function App({ links }) {
+  const [open, setOpen] = useState(false);
 
-export default function App() {
+  function toggleDrawer({ type, key }) {
+    if (type === "keydown" && (key === "Tab" || key === "Shift")) {
+      return;
+    }
+
+    setOpen(!open);
+  }
+
   return (
-    <div style={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper style={headerFooterStyle}>
-            <Typography>Header</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper>
-            <Grid container spacing={2} direction="column">
-              <Grid item xs={12}>
-                <Typography style={navStyle}>Nav Item 1</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography style={navStyle}>Nav Item 2</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography style={navStyle}>Nav Item 3</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography style={navStyle}>Nav Item 4</Typography>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={8}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Paper style={mainStyle}>
-                <Typography>Main Content 1</Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={mainStyle}>
-                <Typography>Main Content 2</Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={mainStyle}>
-                <Typography>Main Content 3</Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper style={mainStyle}>
-                <Typography>Main Content 4</Typography>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper style={headerFooterStyle}>
-            <Typography>Footer</Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-    </div>
+    <Router>
+      <Button onClick={toggleDrawer}>Open Nav</Button>
+      <section>
+        <Route path="/first" component={First} />
+        <Route path="/second" component={Second} />
+        <Route path="/third" component={Third} />
+      </section>
+      <Drawer open={open} onClose={toggleDrawer}>
+        <div
+          style={{ width: 250 }}
+          role="presentation"
+          onClick={toggleDrawer}
+          onKeyDown={toggleDrawer}
+        >
+          <List>
+            {links.map(link => (
+              <ListItem button key={link.url} component={Link} to={link.url}>
+                <Switch>
+                  <Route
+                    exact
+                    path={link.url}
+                    render={() => (
+                      <ListItemText
+                        primary={link.name}
+                        primaryTypographyProps={{ color: "primary" }}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/"
+                    render={() => <ListItemText primary={link.name} />}
+                  />
+                </Switch>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Drawer>
+    </Router>
   );
 }
+
+App.defaultProps = {
+  links: [
+    { url: "/first", name: "First Page" },
+    { url: "/second", name: "Second Page" },
+    { url: "/third", name: "Third Page" }
+  ]
+};
