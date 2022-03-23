@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import "typeface-roboto";
+import React, { Fragment } from "react";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
 export default function App() {
-  const [clicks, setClicks] = useState(0);
+  const textStyle = {
+    backgroundColor: "#cfe8fc",
+    margin: 5,
+    textAlign: "center"
+  };
 
   return (
-    <section>
-      <header>
-        <h1>Hydrating The Client</h1>
-      </header>
-      <main>
-        <p>Clicks {clicks}</p>
-        <button onClick={() => setClicks(clicks + 1)}>Click Me</button>
-      </main>
-    </section>
+    <Fragment>
+      <Container maxWidth="sm">
+        <Typography style={textStyle}>sm</Typography>
+      </Container>
+      <Container maxWidth="md">
+        <Typography style={textStyle}>md</Typography>
+      </Container>
+      <Container maxWidth="lg">
+        <Typography style={textStyle}>lg</Typography>
+      </Container>
+    </Fragment>
   );
 }
