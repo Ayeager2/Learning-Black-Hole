@@ -1,73 +1,66 @@
 import "typeface-roboto";
-import React, { useState } from "react";
-import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import First from "./First";
-import Second from "./Second";
-import Third from "./Third";
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
 
-export default function App({ links }) {
-  const [open, setOpen] = useState(false);
+const tabContentStyle = {
+  padding: 16
+};
 
-  function toggleDrawer({ type, key }) {
-    if (type === "keydown" && (key === "Tab" || key === "Shift")) {
-      return;
-    }
-
-    setOpen(!open);
-  }
-
+function TabContainer({ value }) {
   return (
-    <Router>
-      <Button onClick={toggleDrawer}>Open Nav</Button>
-      <section>
-        <Route path="/first" component={First} />
-        <Route path="/second" component={Second} />
-        <Route path="/third" component={Third} />
-      </section>
-      <Drawer open={open} onClose={toggleDrawer}>
-        <div
-          style={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer}
-          onKeyDown={toggleDrawer}
-        >
-          <List>
-            {links.map(link => (
-              <ListItem button key={link.url} component={Link} to={link.url}>
-                <Switch>
-                  <Route
-                    exact
-                    path={link.url}
-                    render={() => (
-                      <ListItemText
-                        primary={link.name}
-                        primaryTypographyProps={{ color: "primary" }}
-                      />
-                    )}
-                  />
-                  <Route
-                    path="/"
-                    render={() => <ListItemText primary={link.name} />}
-                  />
-                </Switch>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      </Drawer>
-    </Router>
+    <AppBar position="static">
+      <Tabs value={value}>
+        <Tab label="Item One" component={Link} to="/" />
+        <Tab label="Item Two" component={Link} to="/page2" />
+        <Tab label="Item Three" component={Link} to="/page3" />
+      </Tabs>
+    </AppBar>
   );
 }
 
-App.defaultProps = {
-  links: [
-    { url: "/first", name: "First Page" },
-    { url: "/second", name: "Second Page" },
-    { url: "/third", name: "Third Page" }
-  ]
-};
+export default function App() {
+  return (
+    <Router>
+      <Route
+        exact
+        path="/"
+        render={() => (
+          <Fragment>
+            <TabContainer value={0} />
+            <Typography component="div" style={tabContentStyle}>
+              Item One
+            </Typography>
+          </Fragment>
+        )}
+      />
+      <Route
+        exact
+        path="/page2"
+        render={() => (
+          <Fragment>
+            <TabContainer value={1} />
+            <Typography component="div" style={tabContentStyle}>
+              Item Two
+            </Typography>
+          </Fragment>
+        )}
+      />
+      <Route
+        exact
+        path="/page3"
+        render={() => (
+          <Fragment>
+            <TabContainer value={2} />
+            <Typography component="div" style={tabContentStyle}>
+              Item Three
+            </Typography>
+          </Fragment>
+        )}
+      />
+    </Router>
+  );
+}
