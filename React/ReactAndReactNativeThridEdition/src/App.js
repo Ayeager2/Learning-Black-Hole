@@ -1,62 +1,26 @@
 import "typeface-roboto";
-import React, { useState } from "react";
+import React, { Fragment } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import AndroidIcon from "@material-ui/icons/Android";
 
-const buttonStyle = { margin: 10 };
-
-function toggleColor(setter, value) {
-  setter(value === "default" ? "primary" : "default");
-}
+const useButtonStyles = makeStyles(theme => ({
+  root: { margin: theme.spacing(1) },
+  contained: { borderRadius: theme.shape.borderRadius + 2 },
+  sizeSmall: { fontWeight: theme.typography.fontWeightLight }
+}));
 
 export default function App() {
-  const [contained, setContained] = useState("default");
-  const [text, setText] = useState("default");
-  const [outlined, setOutlined] = useState("default");
-  const [icon, setIcon] = useState("default");
+  const buttonClasses = useButtonStyles();
 
   return (
-    <Grid container>
-      <Grid
-        item
-        component={Button}
-        variant="contained"
-        style={buttonStyle}
-        color={contained}
-        onClick={() => toggleColor(setContained, contained)}
-      >
-        Contained
-      </Grid>
-      <Grid
-        item
-        component={Button}
-        style={buttonStyle}
-        color={text}
-        onClick={() => toggleColor(setText, text)}
-      >
-        Text
-      </Grid>
-      <Grid
-        item
-        component={Button}
-        variant="outlined"
-        style={buttonStyle}
-        color={outlined}
-        onClick={() => toggleColor(setOutlined, outlined)}
-      >
-        Outlined
-      </Grid>
-      <Grid
-        item
-        component={IconButton}
-        style={buttonStyle}
-        color={icon}
-        onClick={() => toggleColor(setIcon, icon)}
-      >
-        <AndroidIcon />
-      </Grid>
-    </Grid>
+    <Fragment>
+      <Button classes={buttonClasses}>First</Button>
+      <Button classes={buttonClasses} variant="contained">
+        Second
+      </Button>
+      <Button classes={buttonClasses} size="small" variant="outlined">
+        Third
+      </Button>
+    </Fragment>
   );
 }
