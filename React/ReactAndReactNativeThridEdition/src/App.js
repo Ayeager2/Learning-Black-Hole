@@ -1,26 +1,32 @@
 import "typeface-roboto";
-import React, { Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import React from "react";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
-const useButtonStyles = makeStyles(theme => ({
-  root: { margin: theme.spacing(1) },
-  contained: { borderRadius: theme.shape.borderRadius + 2 },
-  sizeSmall: { fontWeight: theme.typography.fontWeightLight }
-}));
+const theme = createMuiTheme({
+  typography: {
+    fontSize: 11
+  },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        marginLeft: 15,
+        marginRight: 15
+      }
+    }
+  }
+});
 
 export default function App() {
-  const buttonClasses = useButtonStyles();
-
   return (
-    <Fragment>
-      <Button classes={buttonClasses}>First</Button>
-      <Button classes={buttonClasses} variant="contained">
-        Second
-      </Button>
-      <Button classes={buttonClasses} size="small" variant="outlined">
-        Third
-      </Button>
-    </Fragment>
+    <ThemeProvider theme={theme}>
+      <Menu anchorEl={document} open={true}>
+        <MenuItem>First Item</MenuItem>
+        <MenuItem>Second Item</MenuItem>
+        <MenuItem>Third Item</MenuItem>
+      </Menu>
+    </ThemeProvider>
   );
 }
