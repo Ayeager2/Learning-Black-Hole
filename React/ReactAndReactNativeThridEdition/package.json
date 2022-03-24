@@ -1,12 +1,11 @@
 {
-  "name": "navigating-with-tabs",
+  "name": "checkboxes-and-radio-buttons",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
     "typeface-roboto": "0.0.75"
   },

@@ -1,66 +1,35 @@
 import "typeface-roboto";
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
+import Checkbox from "@material-ui/core/Checkbox";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
-const tabContentStyle = {
-  padding: 16
-};
+export default function Checkboxes() {
+  const [checkbox, setCheckbox] = useState(false);
+  const [radio, setRadio] = useState("First");
 
-function TabContainer({ value }) {
   return (
-    <AppBar position="static">
-      <Tabs value={value}>
-        <Tab label="Item One" component={Link} to="/" />
-        <Tab label="Item Two" component={Link} to="/page2" />
-        <Tab label="Item Three" component={Link} to="/page3" />
-      </Tabs>
-    </AppBar>
-  );
-}
-
-export default function App() {
-  return (
-    <Router>
-      <Route
-        exact
-        path="/"
-        render={() => (
-          <Fragment>
-            <TabContainer value={0} />
-            <Typography component="div" style={tabContentStyle}>
-              Item One
-            </Typography>
-          </Fragment>
-        )}
+    <div>
+      <FormControlLabel
+        label={`Checkbox ${checkbox ? "(checked)" : ""}`}
+        control={
+          <Checkbox
+            checked={checkbox}
+            onChange={() => setCheckbox(!checkbox)}
+          />
+        }
       />
-      <Route
-        exact
-        path="/page2"
-        render={() => (
-          <Fragment>
-            <TabContainer value={1} />
-            <Typography component="div" style={tabContentStyle}>
-              Item Two
-            </Typography>
-          </Fragment>
-        )}
-      />
-      <Route
-        exact
-        path="/page3"
-        render={() => (
-          <Fragment>
-            <TabContainer value={2} />
-            <Typography component="div" style={tabContentStyle}>
-              Item Three
-            </Typography>
-          </Fragment>
-        )}
-      />
-    </Router>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">{radio}</FormLabel>
+        <RadioGroup value={radio} onChange={e => setRadio(e.target.value)}>
+          <FormControlLabel value="First" label="First" control={<Radio />} />
+          <FormControlLabel value="Second" label="Second" control={<Radio />} />
+          <FormControlLabel value="Third" label="Third" control={<Radio />} />
+        </RadioGroup>
+      </FormControl>
+    </div>
   );
 }
