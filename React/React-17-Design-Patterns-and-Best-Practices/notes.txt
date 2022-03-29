@@ -1,0 +1,136 @@
+Babel is a popular JavaScript compiler widely adopted within the React community. Babel can compile ES6 code into ES5 JavaScript, as well as compile JSX into JavaScript functions. This process is called transpilation because it compiles the source into a new source rather than into an executable.
+To install Babel, we need to install @babel/core and @babel/node as follows: 
+
+    npm install -g @babel/core @babel/node
+
+When the installation is complete, we can run the following command to compile any JavaScript file:
+
+    babel source.js -o output.js
+
+One of the reasons why Babel is so powerful is because it is highly configurable. Babel is just a tool to transpile a source file into an output file, but to apply some transformations, we need to configure it.
+Luckily, there are some very useful presets of configurations that we can easily install and use:
+
+    npm install -g @babel/preset-env @babel/preset-react
+
+Once the installation is complete, we create a configuration file called .babelrc in the root folder, and put the following lines into it to tell Babel to use those presets:
+
+{ "presets": [
+    "@babel/preset-env", "@babel/preset-react"
+] }
+
+From this point on, we can write ES6 and JSX in our source files and execute the output files in the browser.
+
+Attributes
+
+-We must always keep in mind that JSX is not a standard language and that it gets transpiled into JavaScript. Because of this, some attributes cannot be used.
+For example, instead of class, we have to use className, and instead of for, we have to use htmlFor.
+
+Style
+
+-he style attribute does not accept a CSS string as the HTML parallel does, but it expects a JavaScript object where the style names are camelCased.
+    const styles = { 
+            backgroundColor: 'red'
+        }
+         <div style={styles} />
+
+Boolean attributes
+
+A couple more things are worth mentioning before really starting regarding the way you define Boolean attributes in JSX. If you set an attribute without a value, JSX assumes that its value is true.This means that if we want to set an attribute to false, we have to declare it explicitly as false.
+
+Spread attributes
+
+An important feature is the spread attribute operator (...), which comes from the rest/spread properties for ECMAScript proposal, and is very convenient whenever we want to pass all the attributes of a JavaScript object to an element.
+A common practice that leads to fewer bugs is not to pass entire JavaScript objects down to children by reference, but to use their primitive values, which can be easily validated, making components more robust and error-proof.
+
+Multi-properties
+
+ A common problem in writing JSX comes when an element has multiples attributes.Write each attribute on a new line.
+
+Conditionals
+
+Things get more interesting when we start working with conditionals, for example, if we want to render some components only when certain conditions are matched. The fact that we can use JavaScript in our conditions is a big plus, but there are many different ways to express conditions in JSX, and it is important to understand the benefits and problems of each one of these to write code that is both readable and maintainable. We can use a ternary condition that makes the code more compact.
+
+Going back to conditional statements, other solutions require using external dependencies. A good practice is to avoid external dependencies as much as we can to keep our bundle smaller, but it may be worth it in this particular case because improving the readability of our templates is a big win.
+
+The first solution is render-if, which we can install with the following: 
+
+    npm install --save render-if
+
+The utility function that gets returned can be used as a function that receives the JSX markup to be shown when the condition is true.One goal is to never add too much logic inside our components. Some of them will require a bit of it, but we should try to keep them as simple as possible so that we can easily spot and fix errors.
+
+We should at least try to keep the renderIf method as clean as possible and to do that, we can use another utility library, called react-only-if, which lets us write our components as if the condition is always true by setting the conditional function using a Higher-Order Component (HOC). HOC's they are functions that receive a component and return an enhanced one by adding some properties or modifying their behavior.
+
+To use the library, we need to install it as follows: 
+
+    npm install --save react-only-if
+
+The function used to validate the condition receives the props, state, and context of the component.
+In this way, we avoid polluting our component with conditionals so that it is easier to understand and reason about.
+
+Control statements
+
+Conditionals and loops are very common operations in UI templates, and you may feel wrong using the JavaScript ternary or the map function to perform them. JSX has been built in such a way that it only abstracts the creation of the elements, leaving the logic parts to real JavaScript, which is great except that sometimes, the code becomes less clear.
+In general, we aim to remove all the logic from our components, and especially from our render methods, but sometimes we have to show and hide elements according to the state of the application, and very often we have to loop through collections and arrays.
+If you feel that using JSX for that kind of operation will make your code more readable, there is a Babel plugin available to do just that: jsx-control-statements.
+
+npm install --save jsx-control-statements
+
+Once it is installed, we have to add it to the list of our Babel plugins in our .babelrc file: "plugins": 
+
+["jsx-control-statements"]
+
+From now on, we can use the syntax provided by the plugin and Babel will transpile it together with the common JSX syntax.
+
+Sub-rendering
+
+It is worth stressing that we always want to keep our components very small and our render methods very clean and simple.
+However, that is not an easy goal, especially when you are creating an application iteratively, and in the first iteration, you are not sure exactly how to split the components into smaller ones. So, what should we be doing when the render method becomes too big to maintain? One solution is to split it into smaller functions in a way that lets us keep all the logic in the same component.
+
+Styling code
+
+EditorConfig
+
+ EditorConfig helps developers to maintain consistent coding styles between different IDEs.EditorConfig is supported by a lot of editors. You can check whether your editor is supported or not on the official website, 
+    https:/ / www. editorconfig. org.
+
+Prettier
+
+ Prettier is an opinionated code formatter, supported by many languages that can be integrated with most editors. This plugin is really useful because you can format the code on saving and you don't need to discuss the code style in code reviews, which will save you a lot of time and energy.
+ If you work with Visual Studio Code, you have to install the Prettier extension first.
+ Then, if you want to configure the option to format when you save a file, you need to go to Settings, search Format on Save, and check that option
+
+ ESLint
+
+ ESLint is an open-source project released in 2013 that became popular thanks to the fact that it is highly configurable and extensible.
+
+ Installation
+First of all, we have to install ESLint and some plugins as follows:
+
+    npm install -g eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react
+
+Once the executable is installed, we can run it with the following command: 
+
+    eslint source.ts
+
+The output will tell us if there are errors within the file.
+When we install and run it for the first time, we do not see any errors because it is completely configurable and it does not come with any default rules.
+
+This configuration file needs a bit of explanation: "semi" is the name of the rule and [2, "never"] is the value. It is not very intuitive the first time you see it.
+ESLint rules have three levels that determine the severity of the problem: off (or 0): The rule is disabled. warn (or 1): The rule is a warning. error (or 2): The rule throws an error.
+We are using the 2 value because we want ESLint to throw an error every time our code does not follow the rule. The second parameter tells ESLint that we want the semicolon to never be used (the opposite is always). ESLint and its plugins are very well documented, and for any single rule, you can find the description of the rule and some examples of when it passes and when it fails.
+Now create an index.ts file with the following content: const foo = 'bar';
+If we run eslint index.js, we get the following: Extra semicolon (semi)
+This is great; we set up the linter and it is helping us follow our first rule.
+
+Git Hooks
+
+we can use husky to run our linter in a Git Hook called pre-commit, and it is also useful to run our unit tests on the Hook called prepush.
+
+To install husky, you need to run the following command:
+
+     npm install --save-dev husky
+
+There is a special option (flag) for the ESlint command called --fix – with this option, ESLint will try to fix all our linter errors automatically (not all of them). Be careful with this option because sometimes it can affect a little bit of our code style. Another useful flag is -ext to specify the extensions of the files we want to validate, in this case just the .tsx and .ts files.
+
+Functional programming
+
