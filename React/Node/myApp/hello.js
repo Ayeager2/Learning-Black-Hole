@@ -12,3 +12,14 @@ app.get('/', function(request, response) {
 app.listen(port, function() {
  console.log('Server listening on http://localhost:' + port);
 });
+
+var routes = {
+ '/': function index (request, response) {
+ response.writeHead(200);
+ response.end('Hello, World!');
+ },
+ '/foo': function foo (request, response) {
+ response.writeHead(200);
+ response.end('You are now viewing "foo"');
+ }
+}
