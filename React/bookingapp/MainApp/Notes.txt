@@ -9,5 +9,8 @@ Node Server
 	npm i express
 	npm i nodemon
 		  "scripts": {
-   			 "start": "nodemon index.js"
-  				},
+   		      "start": "nodemon index.js"
+  		   },
+	npm i dotenv
+
+https://github.com/Ayeager2/Learning-Black-Hole.git
