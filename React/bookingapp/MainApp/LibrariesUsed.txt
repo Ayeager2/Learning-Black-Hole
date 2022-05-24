@@ -1,3 +1,0 @@
-React Router: https://flaviocopes.com/react-router/
-Font Awesome: https://fontawesome.com/icons
-React-Date-Range: https://www.npmjs.com/package/react-date-range
