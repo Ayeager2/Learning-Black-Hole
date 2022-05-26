@@ -12,5 +12,8 @@ Node Server
    		      "start": "nodemon index.js"
   		   },
 	npm i dotenv
+	npm i bcryptjs
+	npm i jsonwebtoken
+	npm i cookie-parser
 
 https://github.com/Ayeager2/Learning-Black-Hole.git

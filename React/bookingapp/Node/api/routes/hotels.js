@@ -1,36 +1,24 @@
-import express, { Router } from "express"   //import express
+import express, { Router } from "express"  //import express
+import { createHotel, deleteHotel, getAllHotels, getHotel, updateHotel } from "../controllers/hotelController.js";
+
 import Hotel from "../models/Hotel.js";
 
 const router = express.Router();
 
 //CREATE
-router.post("/", async (req, res) => {
-    const newHotel = new Hotel(req.body);
+router.post("/", createHotel);   //create a new hotel   
 
-    try {
-        const savedHotel = await newHotel.save();
-        res.status(200).json(savedHotel);
-    }
-    catch (e) {
-        res.status(500).json(e);
-    }
-})
 //UPDATE
-router.put("/:ID", async (req, res) => {
-    const newHotel = new Hotel(req.body);
+router.put("/:id", updateHotel); //:id is a placeholder for the id of the hotel
 
-    try {
-        const updatedHotel = await Hotel.findByIdAndUpdate(req.params.ID, {$set: req.body}, {new:true});
-        res.status(200).json(updatedHotel);
-    }
-    catch (e) {
-        res.status(500).json(e);
-    }
-})
 //DELETE
-//GET
-//GETALL
+router.delete("/:id", deleteHotel);  //:id is a placeholder for the id of the hotel  
 
+//GET
+router.get("/:id",getHotel); //:id is a placeholder for the id of the hotel 
+
+//GET ALL
+router.get("/", getAllHotels); //get all hotels                        
 
 
 export default router;
