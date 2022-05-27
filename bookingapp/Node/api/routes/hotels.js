@@ -2,17 +2,18 @@ import express, { Router } from "express"  //import express
 import { createHotel, deleteHotel, getAllHotels, getHotel, updateHotel } from "../controllers/hotelController.js";
 
 import Hotel from "../models/Hotel.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 //CREATE
-router.post("/", createHotel);   //create a new hotel   
+router.post("/",verifyAdmin, createHotel);   //create a new hotel   
 
 //UPDATE
-router.put("/:id", updateHotel); //:id is a placeholder for the id of the hotel
+router.put("/:id",verifyAdmin, updateHotel); //:id is a placeholder for the id of the hotel
 
 //DELETE
-router.delete("/:id", deleteHotel);  //:id is a placeholder for the id of the hotel  
+router.delete("/:id",verifyAdmin, deleteHotel);  //:id is a placeholder for the id of the hotel  
 
 //GET
 router.get("/:id",getHotel); //:id is a placeholder for the id of the hotel 
