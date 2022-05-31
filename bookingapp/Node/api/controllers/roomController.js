@@ -8,59 +8,64 @@ export const createRoom = async (req, res, next) => {
   try {
     const savedRoom = await newRoom.save();
     try {
-      await Hotel.findByIdAndUpdate(hotelId, {$push: { rooms: savedRoom._id }
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $push: { room: savedRoom._id },
       });
     } catch (err) {
       next(createError(err));
     }
     res.status(200).json(savedRoom);
   } catch (err) {
-      next(createError(err));
+    next(createError(err));
   }
 };
 
 export const updateRoom = async (req, res, next) => {
-    const updatedRoom = new Room(req.body);
+  const updatedRoom = new Room(req.body);
 
-    try {
-        const updatedRoom = await Room.findByIdAndUpdate(
-            req.params.id,
-            { $set: req.body },
-            { new: true }
-        );
-        res.status(200).json(updatedRoom);
-    }
-    catch (err) {
-      next(createError(err));
-    }
-}
+  try {
+    const updatedRoom = await Room.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updatedRoom);
+  } catch (err) {
+    next(createError(err));
+  }
+};
 
 export const deleteRoom = async (req, res, next) => {
+  const hotelId = req.params.hotelId;
+  try {
+    await Room.findByIdAndDelete(req.params.id);
     try {
-        await Room.findByIdAndDelete(req.params.id);
-        res.status(200).json("Room has been deleted.");
-    }
-    catch (err) {
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $pull: { room: req.params.id  },
+      });
+    } catch (err) {
       next(createError(err));
     }
-}
+    res.status(200).json("Room has been deleted.");
+  } catch (err) {
+    next(createError(err));
+  }
+};
 
 export const getRoom = async (req, res, next) => {
-    try {
-        const room = await Room.findById(req.params.id);
-        res.status(200).json(room);
-    }
-    catch (err) {
-      next(createError(err));
-    }
-}
+  try {
+    const room = await Room.findById(req.params.id);
+    res.status(200).json(room);
+  } catch (err) {
+    next(createError(err));
+  }
+};
 
 export const getAllRooms = async (req, res, next) => {
-    try {
-        const rooms = await Room.find();
-        res.status(200).json(rooms);
-    }
-    catch (err) {
-      next(createError(err));
-    }
-}
+  try {
+    const rooms = await Room.find();
+    res.status(200).json(rooms);
+  } catch (err) {
+    next(createError(err));
+  }
+};
