@@ -1,18 +1,23 @@
 import React from 'react'
 import "./featured.css"
+import useFetch from "../../Hooks/useFetch";
 
 const Featured = () => {
+
+const {data, loading, error } = useFetch("/hotels/countByCity?cities=columbus,madrid,london");
+
+
     return (
         <div className='featured'>
-            <div className="featuredItem">
+            {loading ? "Loading please wait" : <><div className="featuredItem">
                 <img
                     src="https://cf.bstatic.com/xdata/images/city/square250/349720.webp?k=b7eca2cb90afd858f294732b0d5c194af47e70386b5be99373e3ff03be95c515&o="
                     alt=""
                     className='featuredImg'
                 />
                 <div className="featuredTitles">
-                    <h1>Las Vegas</h1>
-                    <h2>565 properties</h2>
+                    <h1>columbus</h1>
+                    <h2>{data[0]}</h2>
                 </div>
             </div>
             <div className="featuredItem">
@@ -22,8 +27,8 @@ const Featured = () => {
                     className='featuredImg'
                 />
                 <div className="featuredTitles">
-                    <h1>Myrtle Beach</h1>
-                    <h2>2644 properties</h2>
+                    <h1>London</h1>
+                    <h2>{data[1]}</h2>
                 </div>
             </div>
             <div className="featuredItem">
@@ -33,7 +38,7 @@ const Featured = () => {
                 />
                 <div className="featuredTitles">
                     <h1>Columbus</h1>
-                    <h2>157 properties</h2>
+                    <h2>{data[2]}</h2>
                 </div>
             </div>
             <div className="featuredItem">
@@ -42,8 +47,8 @@ const Featured = () => {
                     alt="" className='featuredImg'
                 />
                 <div className="featuredTitles">
-                    <h1>New York</h1>
-                    <h2>1381 properties</h2>
+                    <h1>Madrid</h1>
+                    <h2>{data[3]}</h2>
                 </div>
             </div>
             <div className="featuredItem">
@@ -53,10 +58,10 @@ const Featured = () => {
                     className='featuredImg'
                 />
                 <div className="featuredTitles">
-                    <h1>Orlando</h1>
+                    <h1>Columbus</h1>
                     <h2>3684 properties</h2>
                 </div>
-            </div>
+            </div></>}
 
         </div>
     )
