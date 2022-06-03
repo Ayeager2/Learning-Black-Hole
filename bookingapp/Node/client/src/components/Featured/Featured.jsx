@@ -16,7 +16,7 @@ const {data, loading, error } = useFetch("/hotels/countByCity?cities=columbus,ma
                     className='featuredImg'
                 />
                 <div className="featuredTitles">
-                    <h1>columbus</h1>
+                    <h1>Columbus</h1>
                     <h2>{data[0]}</h2>
                 </div>
             </div>
