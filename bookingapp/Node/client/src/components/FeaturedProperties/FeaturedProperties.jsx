@@ -7,7 +7,8 @@ const FeaturedProperties = () => {
 
     return (
         <div className='fp'>
-            {loading ? "loading" : 
+            
+            {loading ? "loading" :             
             <>
                 {data.map((item) => (
 
