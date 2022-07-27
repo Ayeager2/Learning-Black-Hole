@@ -1,0 +1,19 @@
+React Router: https://flaviocopes.com/react-router/
+Font Awesome: https://fontawesome.com/icons
+React-Date-Range: https://www.npmjs.com/package/react-date-range
+
+
+
+Node Server
+	npm init -y
+	npm i express
+	npm i nodemon
+		  "scripts": {
+   		      "start": "nodemon index.js"
+  		   },
+	npm i dotenv
+	npm i bcryptjs
+	npm i jsonwebtoken
+	npm i cookie-parser
+
+https://github.com/Ayeager2/Learning-Black-Hole.git
